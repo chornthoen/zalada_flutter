@@ -1,36 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/components/lazy_list_view.dart';
-import 'package:zalada_flutter/modules/orders/presenter/payment_khqr_code_page.dart';
-import 'package:zalada_flutter/modules/orders/presenter/payment_method_page.dart';
-import 'package:zalada_flutter/modules/orders/widgets/button_place_order.dart';
 import 'package:zalada_flutter/modules/orders/widgets/item_card.dart';
 import 'package:zalada_flutter/modules/orders/widgets/item_order.dart';
 import 'package:zalada_flutter/modules/product/widgets/payment_add_to_cart.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
-import 'package:zalada_flutter/shared/widgets/custom_dialog.dart';
 
-import 'address_page.dart';
+class OrderHistoryDetailPage extends StatefulWidget {
+  const OrderHistoryDetailPage({super.key});
 
-class OrdersPage extends StatefulWidget {
-  const OrdersPage({super.key});
-
-  static const routePath = '/orders';
+  static const routePath = '/order-history-detail';
 
   @override
-  State<OrdersPage> createState() => _OrdersPageState();
+  State<OrderHistoryDetailPage> createState() => _OrderHistoryDetailPageState();
 }
 
-class _OrdersPageState extends State<OrdersPage> {
-  bool isSelect = false;
-
+class _OrderHistoryDetailPageState extends State<OrderHistoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Order'),
+      appBar: CustomAppBar(title: 'Order History Detail'),
       body: LazyListView(
         children: [
           Container(
@@ -44,78 +35,19 @@ class _OrdersPageState extends State<OrdersPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      'Address',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                    ),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        context.push(AddressPage.routePath);
-                      },
-                      child: Text(
-                        'Edit',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: AppColors.kColorBlue,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ),
-                  ],
+                Text(
+                  'Item',
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '🏠 Home',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    SizedBox(height: AppSpacing.sm),
-                    Text(
-                      'Terk Thla, Sen Sok, Phnom Penh, Cambodia, 12101',
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: AppColors.kGreyColor,
-                            fontWeight: FontWeight.w400,
-                          ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Divider(color: AppColors.kColorGray200, thickness: 4),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSpacing.lg,
-              vertical: AppSpacing.sm,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Item', style: Theme.of(context).textTheme.titleMedium),
                 SizedBox(height: AppSpacing.lg),
-                ...List.generate(
-                  3,
-                  (index) => ItemOrder(
-                    title: 'Apple Watch Series 9 GPS 45mm',
-                    image:
-                        'https://powermaccenter.com/cdn/shop/files/Apple_Watch_Series_9_GPS_45mm_Silver_Aluminum_Storm_Blue_Sport_Band_PDP_Image_Position-1__en-US_8d562dcd-6b02-4975-8a24-26b210107cec_1445x.jpg?v=1699527146',
-                    price: 1999.00,
-                    originalPrice: 2499.00,
-                    quantity: 1,
-                    index: 3 - index,
-                  ),
+                ItemOrder(
+                  title: 'Apple Watch Series 9 GPS 45mm',
+                  image:
+                      'https://powermaccenter.com/cdn/shop/files/Apple_Watch_Series_9_GPS_45mm_Silver_Aluminum_Storm_Blue_Sport_Band_PDP_Image_Position-1__en-US_8d562dcd-6b02-4975-8a24-26b210107cec_1445x.jpg?v=1699527146',
+                  price: 1999.00,
+                  originalPrice: 2499.00,
+                  quantity: 1,
+                  index: 1,
                 ),
               ],
             ),
@@ -137,9 +69,7 @@ class _OrdersPageState extends State<OrdersPage> {
                 const SizedBox(height: AppSpacing.md),
                 InkWell(
                   borderRadius: BorderRadius.circular(AppSpacing.sm),
-                  onTap: () {
-                    context.push(AddressPage.routePath);
-                  },
+                  onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppSpacing.sm),
@@ -266,30 +196,12 @@ class _OrdersPageState extends State<OrdersPage> {
                   name: 'Mastercard',
                   image: 'assets/images/mastercard.png',
                   code: '**** **** 1234',
-                  onPressed: () {
-                    context.push(PaymentMethodPage.routePath);
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: ButtonPlaceOrder(
-        total: '3998.00',
-        onPressed: () {
-          CustomDialog.showDialogCustom(
-            context,
-            isConfirm: false,
-            title: 'Place Order',
-            content: 'Are you sure you want to place this order?',
-            okText: 'Confirm',
-            ok: () {
-              context.pop();
-              context.push(PaymentKHQRCodePage.routePath);
-            },
-          );
-        },
       ),
     );
   }

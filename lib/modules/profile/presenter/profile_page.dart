@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -7,16 +9,16 @@ import 'package:zalada_flutter/modules/orders/presenter/address_page.dart';
 import 'package:zalada_flutter/modules/profile/models/model_language.dart';
 import 'package:zalada_flutter/modules/profile/presenter/about_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/edite_profile_page.dart';
+import 'package:zalada_flutter/modules/profile/presenter/order_history_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/payment_method.dart';
 import 'package:zalada_flutter/modules/profile/presenter/privacy_policy_page.dart';
-import 'package:zalada_flutter/modules/profile/presenter/view_order_page.dart';
 import 'package:zalada_flutter/modules/profile/widgets/button_logout.dart';
 import 'package:zalada_flutter/modules/profile/widgets/item_language.dart';
 import 'package:zalada_flutter/modules/profile/widgets/item_profile.dart';
-import 'package:zalada_flutter/modules/profile/widgets/my_order.dart';
 import 'package:zalada_flutter/modules/profile/widgets/my_profile.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
+import 'package:zalada_flutter/shared/widgets/custom_dialog.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -83,13 +85,11 @@ class _ProfilePageState extends State<ProfilePage> {
               email: 'rose@gmail.com',
             ),
             const SizedBox(height: AppSpacing.lg),
-            MyOrders(
-              onTap: () {
-                context.push(ViewOrderPage.routePath,
-                  extra: '2'
-                );
-              },
-            ),
+            // MyOrders(
+            //   onTap: () {
+            //     context.push(ViewOrderPage.routePath, extra: '2');
+            //   },
+            // ),
             Divider(
               color: AppColors.kColorGray200,
               thickness: 4,
@@ -125,6 +125,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: PhosphorIconsRegular.creditCard,
                     onTap: () {
                       context.push(PaymentMethodProfilePage.routePath);
+                    },
+                  ),
+                  ItemProfile(
+                    title: 'Order History',
+                    icon: PhosphorIconsRegular.clock,
+                    onTap: () {
+                      context.push(OrderHistoryPage.routePath);
                     },
                   ),
                   ItemProfile(
@@ -201,7 +208,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             ButtonLogOut(
               onTap: () {
-                _showDialogLogout();
+                CustomDialog.showDialogCustom(
+                  context,
+                  title: 'Logout',
+                  content: 'Are you sure you want to logout?',
+                  ok: () => context.go(LoginPage.routePath),
+                  okText: 'Logout',
+                );
               },
             )
           ],
@@ -210,75 +223,47 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  void _showDialogLogout() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Log out'),
-          content: Text('Are you sure you want to log out?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                context.go(LoginPage.routePath);
-              },
-              child: Text(
-                'Log out',
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void selectLanguage() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(AppSpacing.lg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Select Language',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: AppSpacing.md),
-              ...List.generate(
-                listLanguage.length,
-                (index) => ItemLanguage(
-                  name: listLanguage[index].name,
-                  logo: listLanguage[index].logo,
-                  onPressed: () {
-                    setState(() {
-                      if (listLanguage[index].isSelect == true) {
-                        for (var element in listLanguage) {
-                          element.isSelect = false;
-                        }
-                      } else {
-                        for (var element in listLanguage) {
-                          element.isSelect = false;
-                        }
-                        listLanguage[index].isSelect = true;
-                      }
-                    });
-                    Navigator.pop(context);
-                  },
-                  isSelect: listLanguage[index].isSelect,
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+          child: Container(
+            padding: EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Select Language',
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-              ),
-            ],
+                const SizedBox(height: AppSpacing.md),
+                ...List.generate(
+                  listLanguage.length,
+                  (index) => ItemLanguage(
+                    name: listLanguage[index].name,
+                    logo: listLanguage[index].logo,
+                    onPressed: () {
+                      setState(() {
+                        if (listLanguage[index].isSelect == true) {
+                          for (var element in listLanguage) {
+                            element.isSelect = false;
+                          }
+                        } else {
+                          for (var element in listLanguage) {
+                            element.isSelect = false;
+                          }
+                          listLanguage[index].isSelect = true;
+                        }
+                      });
+                      Navigator.pop(context);
+                    },
+                    isSelect: listLanguage[index].isSelect,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

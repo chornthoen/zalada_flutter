@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/forget_password/page/forget_password_page.dart';
 import 'package:zalada_flutter/modules/authentication/register/page/register_page.dart';
@@ -27,10 +28,19 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
+  late LocalAuthentication localAuth;
+  bool _supportsLocalAuth = false;
+
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    localAuth = LocalAuthentication();
+    localAuth.isDeviceSupported().then((value) {
+      setState(() {
+        _supportsLocalAuth = value;
+      });
+    });
     super.initState();
   }
 
@@ -77,6 +87,11 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       setState(() {
                         obscureText = !obscureText;
+                        // if (obscureText == false) {
+                        //   obscureText = true;
+                        // } else {
+                        //   _authenticate();
+                        // }
                       });
                     },
                     suffixIcon: obscureText
@@ -144,5 +159,25 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _authenticate() async {
+    try {
+      bool isAuthenticated = await localAuth.authenticate(
+        localizedReason: 'Please authenticate to show account balance',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          sensitiveTransaction: true,
+        ),
+      );
+      if (isAuthenticated) {
+        setState(() {
+          obscureText = !obscureText;
+        });
+        // context.push(MainPage.routePath);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

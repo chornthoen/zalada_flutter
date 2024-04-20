@@ -30,7 +30,6 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
         onLeft: () {
           if (widget.type == '1') {
             context.go(MainPage.routePath);
-            pageController.jumpToPage(0);
           } else {
             context.pop();
           }

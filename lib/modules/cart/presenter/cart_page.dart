@@ -10,6 +10,7 @@ import 'package:zalada_flutter/modules/orders/presenter/orders_page.dart';
 import 'package:zalada_flutter/modules/wishlist/widgets/product_card.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
+import 'package:zalada_flutter/shared/widgets/custom_dialog.dart';
 
 import '../../wishlist/models/product_wishlist.dart';
 
@@ -62,7 +63,7 @@ class _CartPageState extends State<CartPage>
             padding: const EdgeInsets.all(AppSpacing.sm),
             child: Icon(
               PhosphorIcons.dotsThreeVertical(),
-              color: Colors.black,
+              color: AppColors.kColorGray500,
             ),
           ),
           const SizedBox(width: AppSpacing.lg),
@@ -117,7 +118,7 @@ class _CartPageState extends State<CartPage>
                   originalPrice: item.originalPrice,
                   quantity: item.quantity,
                   onDelete: () {
-                    _showDialogConfirmDelete(context, index: index);
+                    _confirmDelete(index);
                   },
                   selected: item.selected,
                   onDecrement: () {
@@ -206,58 +207,16 @@ class _CartPageState extends State<CartPage>
     );
   }
 
-  Future<void> _showDialogConfirmDelete(
-    BuildContext context, {
-    required int index,
-  }) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(
-            child: Text(
-              'Delete Product',
-              style: TextStyle(
-                color: AppColors.kPrimaryColor,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                Text(
-                  'Are you sure you want to delete this item?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text(
-                'Delete',
-                style: TextStyle(color: Colors.red),
-              ),
-              onPressed: () {
-                removeItem(index);
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+  Future<void> _confirmDelete(int index) async {
+    CustomDialog.showDialogCustom(
+      context,
+      title: 'Delete Product',
+      content: 'Are you sure you want to delete this item?',
+      ok: () {
+        removeItem(index);
+        Navigator.of(context).pop();
       },
+      okText: 'Delete',
     );
   }
 }

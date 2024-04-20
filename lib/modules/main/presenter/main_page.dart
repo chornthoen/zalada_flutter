@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/components/bottom_nav_item.dart';
 import 'package:zalada_flutter/modules/home/presenter/home_page.dart';
@@ -58,10 +61,49 @@ class _MainPageState extends State<MainPage>
     },
   ];
 
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+  late StreamSubscription listener;
+
   @override
   void initState() {
     super.initState();
     pageController = PageController();
+    listener = InternetConnectionChecker().onStatusChange.listen((status) {
+      if (status == InternetConnectionStatus.disconnected) {
+        print('Disconnected');
+        showDialogBox();
+      } else if (status == InternetConnectionStatus.connected) {
+        print('Connected');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    listener.cancel();
+    super.dispose();
+  }
+
+  Future<void> showDialogBox() async {
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: const Text('No Connection'),
+        content: const Text('Please check your internet connectivity'),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              if (!(await InternetConnectionChecker().hasConnection)) {
+                showDialogBox();
+              }
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

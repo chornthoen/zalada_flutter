@@ -1,8 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_outlined_button.dart';
 
 class CustomBottomSheet {
   static void showBottomSheetSuccess({
@@ -61,7 +62,6 @@ class CustomBottomSheet {
 
   static Future<void> successOrder(
     BuildContext context, {
-    required VoidCallback onGoHome,
     required VoidCallback onViewOrder,
   }) async {
     return showModalBottomSheet(
@@ -77,55 +77,54 @@ class CustomBottomSheet {
       ),
       isScrollControlled: true,
       builder: (context) {
-        return Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(AppSpacing.lg),
-              topRight: Radius.circular(AppSpacing.lg),
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(AppSpacing.lg),
+                topRight: Radius.circular(AppSpacing.lg),
+              ),
             ),
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
-            vertical: AppSpacing.md,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: AppSpacing.md),
-              Center(
-                child: Image(
-                  image: AssetImage('assets/images/onboarding3.png'),
-                  fit: BoxFit.cover,
-                  width: 180,
-                  height: 180,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg,
+              vertical: AppSpacing.md,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: AppSpacing.md),
+                Center(
+                  child: Image(
+                    image: AssetImage('assets/images/onboarding3.png'),
+                    fit: BoxFit.cover,
+                    width: 180,
+                    height: 180,
+                  ),
                 ),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              Text(
-                'Order Successfully!',
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              Text(
-                'Your order is ready to place',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: AppColors.kGreyColor,
-                    ),
-              ),
-              const SizedBox(height: AppSpacing.xlg),
-              CustomElevated(
-                onPressed: onViewOrder,
-                text: 'View Order',
-              ),
-              const SizedBox(height: AppSpacing.md),
-              CustomOutlinedButton(
-                text: 'Back to Home',
-                onPressed: onGoHome,
-              )
-            ],
+                const SizedBox(height: AppSpacing.md),
+                Text(
+                  'Order Successfully!',
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                Text(
+                  'Your order is ready to place',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.kGreyColor,
+                      ),
+                ),
+                const Spacer(),
+                CustomElevated(
+                  onPressed: onViewOrder,
+                  text: 'Done',
+                ),
+                const SizedBox(height: AppSpacing.xlg),
+              ],
+            ),
           ),
         );
       },

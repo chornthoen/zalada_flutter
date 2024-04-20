@@ -21,8 +21,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   void initState() {
-    pageController = PageController(initialPage: currentIndex);
     super.initState();
+    pageController = PageController(initialPage: currentIndex);
   }
 
   @override
@@ -74,7 +74,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               onPressed: currentIndex == 2
                   ? null
                   : () {
-                      context.push(LoginPage.routePath);
+                      context.go(LoginPage.routePath);
                     },
               child: Text(
                 currentIndex == 2 ? '' : 'Skip',
@@ -146,7 +146,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   curve: Curves.easeIn,
                 );
                 if (currentIndex == 2) {
-                  context.push(LoginPage.routePath);
+                  context.go(LoginPage.routePath);
                 }
               },
             ),

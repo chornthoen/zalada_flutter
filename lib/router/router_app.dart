@@ -14,15 +14,19 @@ import 'package:zalada_flutter/modules/onboarding/presenter/onboarding_page.dart
 import 'package:zalada_flutter/modules/orders/presenter/address_page.dart';
 import 'package:zalada_flutter/modules/orders/presenter/edit_address_page.dart';
 import 'package:zalada_flutter/modules/orders/presenter/orders_page.dart';
+import 'package:zalada_flutter/modules/orders/presenter/payment_khqr_code_page.dart';
 import 'package:zalada_flutter/modules/orders/presenter/payment_method_page.dart';
 import 'package:zalada_flutter/modules/product/presenter/product_detail_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/about_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/add_payment_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/edite_profile_page.dart';
+import 'package:zalada_flutter/modules/profile/presenter/order_history_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/payment_method.dart';
 import 'package:zalada_flutter/modules/profile/presenter/privacy_policy_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/view_order_page.dart';
 import 'package:zalada_flutter/modules/splash/splash_page.dart';
+
+import '../modules/profile/presenter/order_history_detail_page.dart';
 
 class AppRouter {
   AppRouter._();
@@ -116,21 +120,35 @@ class AppRouter {
         builder: (context, state) => SeeAllCategoriesPage(),
       ),
       GoRoute(
-          path: ViewOrderPage.routePath,
-          builder: (context, state) {
-            final type = state.extra;
-            return ViewOrderPage(type: type as String);
-          }),
+        path: ViewOrderPage.routePath,
+        builder: (context, state) {
+          final type = state.extra;
+          return ViewOrderPage(type: type as String);
+        },
+      ),
       GoRoute(
         path: EditAddressPage.routePath,
         builder: (context, state) => EditAddressPage(),
       ),
       GoRoute(
-          path: DetailCategoryPage.routePath,
-          builder: (context, state) {
-            final title = state.extra;
-            return DetailCategoryPage(title: title as String);
-          }),
+        path: DetailCategoryPage.routePath,
+        builder: (context, state) {
+          final title = state.extra;
+          return DetailCategoryPage(title: title as String);
+        },
+      ),
+      GoRoute(
+        path: OrderHistoryPage.routePath,
+        builder: (context, state) => OrderHistoryPage(),
+      ),
+      GoRoute(
+        path: OrderHistoryDetailPage.routePath,
+        builder: (context, state) => OrderHistoryDetailPage(),
+      ),
+      GoRoute(
+        path: PaymentKHQRCodePage.routePath,
+        builder: (context, state) => PaymentKHQRCodePage(),
+      ),
     ],
   );
 }

@@ -3,12 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/custom_button_social_media.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/do_not_account.dart';
-import 'package:zalada_flutter/modules/authentication/widgets/label_text.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/or_continue_with.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -57,50 +56,47 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: AppSpacing.xlg),
                   Text(
                     'Create your new\naccount.',
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  SizedBox(height: AppSpacing.xlg),
-                  LabelText(label: 'Email Address'),
-                  SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
+                  SizedBox(height: AppSpacing.xlg + 10),
+                  TextFieldCustom(
                     controller: emailController,
-                    hintText: 'Email address',
+                    label: 'Email address',
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: AppSpacing.lg),
-                  LabelText(label: 'Password'),
-                  SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
+                  SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
                     controller: passwordController,
-                    onPressed: () {
+                    onSuffixTap: () {
                       setState(() {
                         obscureText = !obscureText;
                       });
                     },
-                    suffixIcon: obscureText
+                    suffix: obscureText
                         ? PhosphorIconsRegular.eye
                         : PhosphorIconsRegular.eyeSlash,
-                    hintText: 'Password',
+                    label: 'Password',
                     obscureText: obscureText,
+                    textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: AppSpacing.lg),
-                  LabelText(label: 'Confirm Password'),
-                  SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
+                  SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
                     controller: confirmPasswordController,
-                    onPressed: () {
+                    onSuffixTap: () {
                       setState(() {
                         obscureTextConfirm = !obscureTextConfirm;
                       });
                     },
-                    suffixIcon: obscureTextConfirm
+                    suffix: obscureTextConfirm
                         ? PhosphorIconsRegular.eye
                         : PhosphorIconsRegular.eyeSlash,
-                    hintText: 'Confirm Password',
+                    label: 'Confirm Password',
                     obscureText: obscureTextConfirm,
                   ),
                   SizedBox(height: AppSpacing.xxlg),

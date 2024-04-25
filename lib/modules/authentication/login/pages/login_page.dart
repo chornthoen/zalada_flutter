@@ -6,14 +6,13 @@ import 'package:zalada_flutter/modules/authentication/forget_password/page/forge
 import 'package:zalada_flutter/modules/authentication/register/page/register_page.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/custom_button_social_media.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/do_not_account.dart';
-import 'package:zalada_flutter/modules/authentication/widgets/label_text.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/or_continue_with.dart';
 import 'package:zalada_flutter/modules/main/presenter/main_page.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -67,38 +66,34 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: AppSpacing.xlg),
                   Text(
                     'Login to your\naccount.',
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  SizedBox(height: AppSpacing.xlg),
-                  LabelText(label: 'Email Address'),
-                  SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
-                    hintText: 'Email address',
+                  SizedBox(height: AppSpacing.xlg + 20),
+                  const TextFieldCustom(
+                    label: 'Email',
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: AppSpacing.lg),
-                  LabelText(label: 'Password'),
-                  SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
-                    onPressed: () {
+                  SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
+                    onSuffixTap: () {
                       setState(() {
                         obscureText = !obscureText;
-                        // if (obscureText == false) {
-                        //   obscureText = true;
-                        // } else {
-                        //   _authenticate();
-                        // }
                       });
                     },
-                    suffixIcon: obscureText
+                    suffix: obscureText
                         ? PhosphorIconsRegular.eye
                         : PhosphorIconsRegular.eyeSlash,
-                    hintText: 'Password',
+                    label: 'Password',
                     obscureText: obscureText,
+                    onSubmitted: (value) {
+                      context.push(MainPage.routePath);
+                    },
                   ),
                   SizedBox(height: AppSpacing.sm),
                   Align(

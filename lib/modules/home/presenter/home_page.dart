@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               SectionTitle(
-                title: 'Best Deal',
+                title: 'Best Deals',
                 action: 'See all',
                 onAction: () {
                   context.push(SeeAllCategoriesPage.routePath);

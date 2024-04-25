@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:zalada_flutter/modules/authentication/widgets/label_text.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -53,50 +52,45 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              LabelText(label: 'Old Password'),
-              SizedBox(height: AppSpacing.sm),
-              CustomTextFieldForms(
-                hintText: 'Old Password',
+              SizedBox(height: AppSpacing.lg),
+              TextFieldCustom(
+                label: 'Old Password',
                 obscureText: obscureTextOld,
                 controller: _oldPasswordController,
-                onPressed: () {
+                onSuffixTap: () {
                   setState(() {
                     obscureTextOld = !obscureTextOld;
                   });
                 },
-                suffixIcon: obscureTextOld
+                suffix: obscureTextOld
                     ? PhosphorIconsRegular.eye
                     : PhosphorIconsRegular.eyeSlash,
               ),
-              SizedBox(height: AppSpacing.md),
-              LabelText(label: 'New Password'),
-              SizedBox(height: AppSpacing.sm),
-              CustomTextFieldForms(
-                hintText: 'New Password',
+              SizedBox(height: AppSpacing.xlg),
+              TextFieldCustom(
+                label: 'New Password',
                 obscureText: obscureTextNew,
                 controller: _newPasswordController,
-                onPressed: () {
+                onSuffixTap: () {
                   setState(() {
                     obscureTextNew = !obscureTextNew;
                   });
                 },
-                suffixIcon: obscureTextNew
+                suffix: obscureTextNew
                     ? PhosphorIconsRegular.eye
                     : PhosphorIconsRegular.eyeSlash,
               ),
-              SizedBox(height: AppSpacing.md),
-              LabelText(label: 'Confirm Password'),
-              SizedBox(height: AppSpacing.sm),
-              CustomTextFieldForms(
-                hintText: 'Confirm Password',
+              SizedBox(height: AppSpacing.xlg),
+              TextFieldCustom(
+                label: 'Confirm Password',
                 obscureText: obscureTextConfirm,
                 controller: _confirmPasswordController,
-                onPressed: () {
+                onSuffixTap: () {
                   setState(() {
                     obscureTextConfirm = !obscureTextConfirm;
                   });
                 },
-                suffixIcon: obscureTextConfirm
+                suffix: obscureTextConfirm
                     ? PhosphorIconsRegular.eye
                     : PhosphorIconsRegular.eyeSlash,
               ),

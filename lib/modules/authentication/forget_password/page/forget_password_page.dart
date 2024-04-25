@@ -5,7 +5,7 @@ import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({super.key});
@@ -67,10 +67,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                       ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
-                CustomTextFieldForms(
+                TextFieldCustom(
                   controller: emailController,
-                  hintText: 'Email address',
+                  label: 'Email',
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: AppSpacing.xlg),
                 CustomElevated(

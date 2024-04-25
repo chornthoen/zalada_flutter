@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/login/pages/login_page.dart';
-import 'package:zalada_flutter/modules/authentication/widgets/label_text.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_bottom_sheet.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class NewPasswordPage extends StatefulWidget {
   const NewPasswordPage({super.key});
@@ -66,37 +65,33 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                         fontWeight: FontWeight.w600,
                       ),
                 ),
-                const SizedBox(height: AppSpacing.lg),
-                LabelText(label: 'New Password'),
-                const SizedBox(height: AppSpacing.sm),
-                CustomTextFieldForms(
+                const SizedBox(height: AppSpacing.xlg),
+                TextFieldCustom(
                   controller: passwordController,
-                  hintText: 'New Password',
+                  label: 'New Password',
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: newPassword,
-                  onPressed: () {
+                  onSuffixTap: () {
                     setState(() {
                       newPassword = !newPassword;
                     });
                   },
-                  suffixIcon: newPassword
+                  suffix: newPassword
                       ? PhosphorIconsRegular.eye
                       : PhosphorIconsRegular.eyeSlash,
                 ),
-                const SizedBox(height: AppSpacing.lg),
-                LabelText(label: 'Confirm Password'),
-                const SizedBox(height: AppSpacing.sm),
-                CustomTextFieldForms(
+                const SizedBox(height: AppSpacing.xlg),
+                TextFieldCustom(
                   controller: confirmPasswordController,
-                  hintText: 'Confirm Password',
+                  label: 'Confirm Password',
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: confirmPassword,
-                  onPressed: () {
+                  onSuffixTap: () {
                     setState(() {
                       confirmPassword = !confirmPassword;
                     });
                   },
-                  suffixIcon: confirmPassword
+                  suffix: confirmPassword
                       ? PhosphorIconsRegular.eye
                       : PhosphorIconsRegular.eyeSlash,
                 ),

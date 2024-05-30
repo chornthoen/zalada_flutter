@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 

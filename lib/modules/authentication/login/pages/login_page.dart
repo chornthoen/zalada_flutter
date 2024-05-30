@@ -29,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController passwordController;
 
   late LocalAuthentication localAuth;
-  bool _supportsLocalAuth = false;
 
   @override
   void initState() {
@@ -38,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
     localAuth = LocalAuthentication();
     localAuth.isDeviceSupported().then((value) {
       setState(() {
-        _supportsLocalAuth = value;
       });
     });
     super.initState();
@@ -89,7 +87,10 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     suffixIcon: SvgPicture.asset(
                       obscureText ? Assets.svg.hide.path : Assets.svg.show.path,
-                      color: AppColors.kPrimaryColor,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.kPrimaryColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     label: 'Password',
                     obscureText: obscureText,

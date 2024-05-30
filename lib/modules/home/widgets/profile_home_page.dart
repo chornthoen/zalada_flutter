@@ -125,7 +125,7 @@ class ProfileHomePage extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.all(AppSpacing.sm),
                     child: Assets.svg.notifications.svg(
-                      color: AppColors.kPrimaryColor,
+                      color: AppColors.kRedColor,
                     ),
                   ),
                 ),

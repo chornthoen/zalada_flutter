@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/custom_button_social_media.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/do_not_account.dart';
@@ -83,7 +82,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     suffixIcon: SvgPicture.asset(
                       obscureText ? Assets.svg.hide.path : Assets.svg.show.path,
-                      color: AppColors.kPrimaryColor,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.kPrimaryColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     label: 'Password',
                     obscureText: obscureText,
@@ -101,7 +103,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureTextConfirm
                           ? Assets.svg.hide.path
                           : Assets.svg.show.path,
-                      color: AppColors.kPrimaryColor,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.kPrimaryColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     label: 'Confirm Password',
                     obscureText: obscureTextConfirm,

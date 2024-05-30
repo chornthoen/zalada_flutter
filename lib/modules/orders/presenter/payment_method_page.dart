@@ -118,9 +118,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                   code: listCard[index].code,
                   onPressed: () {
                     setState(() {
-                      listCard.forEach((element) {
+                      for (var element in listCard) {
                         element.isSelect = false;
-                      });
+                      }
                       listCard[index].isSelect = true;
                     });
                     Navigator.pop(context);

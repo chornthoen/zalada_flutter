@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
-import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 
 class CustomDialog {
   static void showDialogCustom(
@@ -50,7 +49,7 @@ class CustomDialog {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: isConfirm! ? Colors.red : AppColors.kPrimaryColor,
+                      color: isConfirm ? Colors.red : AppColors.kPrimaryColor,
                     ),
                   ),
                 ),

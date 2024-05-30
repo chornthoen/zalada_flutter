@@ -33,15 +33,6 @@ class TabAllHome extends StatelessWidget {
     );
   }
 
-  double _checkResponsiveChildAspectRatio(BuildContext context) {
-    if (MediaQuery.of(context).size.width < 600) {
-      return 0.74;
-    } else if (MediaQuery.of(context).size.width < 900) {
-      return 0.78;
-    } else {
-      return 0.6;
-    }
-  }
 
   int _checkResponsiveCrossAxisCount(BuildContext context) {
     if (MediaQuery.of(context).size.width < 600) {

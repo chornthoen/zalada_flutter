@@ -78,18 +78,30 @@ class BottomNavItem extends StatelessWidget {
                         ),
                         child: SvgPicture.asset(
                           selected ? iconSelected : icon,
-                          color: selected
-                              ? Theme.of(context).primaryColor
-                              : Colors.grey[600],
+                          colorFilter: selected
+                              ? const ColorFilter.mode(
+                                  AppColors.kPrimaryColor,
+                                  BlendMode.srcIn,
+                                )
+                              : ColorFilter.mode(
+                                  AppColors.kColorGray500,
+                                  BlendMode.srcIn,
+                                ),
                           width: 24,
                           height: 24,
                         ),
                       )
                     : SvgPicture.asset(
                         selected ? iconSelected : icon,
-                        color: selected
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey[600],
+                        colorFilter: selected
+                            ? const ColorFilter.mode(
+                                AppColors.kPrimaryColor,
+                                BlendMode.srcIn,
+                              )
+                            : ColorFilter.mode(
+                                AppColors.kColorGray500,
+                                BlendMode.srcIn,
+                              ),
                         width: 24,
                         height: 24,
                       ),
@@ -99,7 +111,7 @@ class BottomNavItem extends StatelessWidget {
                   style: TextStyle(
                     color: selected
                         ? Theme.of(context).primaryColor
-                        : Colors.grey[600],
+                        : AppColors.kColorGray600,
                     fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                     fontSize: selected ? 12.5 : 12,
                   ),

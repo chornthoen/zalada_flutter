@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:zalada_flutter/modules/authentication/widgets/label_text.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class EditeProfilePage extends StatefulWidget {

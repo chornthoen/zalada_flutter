@@ -39,9 +39,9 @@ class _AddressPageState extends State<AddressPage> {
                 isSelected: listAddress[index].isSelected,
                 onPressed: () {
                   setState(() {
-                    listAddress.forEach((element) {
+                    for (var element in listAddress) {
                       element.isSelected = false;
-                    });
+                    }
                     listAddress[index].isSelected = true;
                   });
                 },

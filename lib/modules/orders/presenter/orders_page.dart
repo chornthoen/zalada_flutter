@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/components/lazy_list_view.dart';
-import 'package:zalada_flutter/modules/orders/presenter/payment_khqr_code_page.dart';
 import 'package:zalada_flutter/modules/orders/presenter/payment_method_page.dart';
 import 'package:zalada_flutter/modules/orders/widgets/button_place_order.dart';
 import 'package:zalada_flutter/modules/orders/widgets/item_card.dart';

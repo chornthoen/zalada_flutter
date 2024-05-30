@@ -7,6 +7,7 @@ import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
 import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class EditeProfilePage extends StatefulWidget {
   const EditeProfilePage({super.key});
@@ -26,7 +27,7 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
 
   @override
   void initState() {
-    fullNameController = TextEditingController(text: 'Rosé');
+    fullNameController = TextEditingController(text: 'Chorn THOEN');
     emailController = TextEditingController(text: 'thoenchorn@gmail.com');
     phoneNumberController = TextEditingController(text: '081234567890');
     dateOfBirthController = TextEditingController(text: '1997-02-11');
@@ -68,7 +69,7 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
                       children: [
                         ClipOval(
                           child: Image.network(
-                            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg/1200px-Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
+                            'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
                             width: 100,
                             height: 100,
                             fit: BoxFit.cover,
@@ -94,42 +95,32 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.lg),
-                  LabelText(label: 'Full Name'),
-                  const SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
+                  const SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
                     controller: fullNameController,
-                    hintText: 'Enter your full name',
+                    label: 'Full Name',
                     keyboardType: TextInputType.name,
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  LabelText(label: 'Email'),
-                  const SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
-                    hintText: 'Enter your email',
+                  const SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
+                    label: 'Email Address',
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  LabelText(label: 'Date of Birth'),
-                  const SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
-                    hintText: 'Select your date of birth',
+                  const SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
+                    label: 'Date of Birth',
                     controller: dateOfBirthController,
-                    suffixIcon: PhosphorIconsRegular.calendar,
-                    onPressed: selectDate,
+                    suffix: PhosphorIconsRegular.calendar,
+                    onSuffixTap: selectDate,
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  LabelText(label: 'Phone Number'),
-                  const SizedBox(height: AppSpacing.xs),
-                  CustomTextFieldForms(
-                    hintText: 'Enter your phone number',
+                  const SizedBox(height: AppSpacing.xlg),
+                  TextFieldCustom(
+                    label: 'Phone Number',
                     controller: phoneNumberController,
                     keyboardType: TextInputType.phone,
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  LabelText(label: 'Gender'),
-                  const SizedBox(height: AppSpacing.xs),
+                  const SizedBox(height: AppSpacing.xlg),
                   GestureDetector(
                     onTap: () {
                       DropdownMenuItem<String>(
@@ -137,12 +128,12 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
                         child: Text(selectedGender!),
                       );
                     },
-                    child: CustomTextFieldForms(
-                      hintText: 'Select your gender',
-                      enable: false,
+                    child: TextFieldCustom(
+                      label: 'Gender',
+                      enabled: false,
                       controller: genderController,
-                      suffixIcon: PhosphorIconsRegular.caretDown,
-                      onPressed: () {
+                      suffix: PhosphorIconsRegular.caretDown,
+                      onSuffixTap: () {
                         DropdownMenuItem<String>(
                           value: selectedGender,
                           child: Text(selectedGender!),
@@ -150,7 +141,6 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
                       },
                     ),
                   ),
-                  const SizedBox(height: AppSpacing.xlg),
                 ],
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/modules/product/presenter/product_detail_page.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
@@ -119,12 +120,21 @@ class CartItemCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(100),
                               onTap: onDecrement,
                               child: Container(
-                                padding: const EdgeInsets.all(AppSpacing.xs),
+                                padding:
+                                    const EdgeInsets.all(AppSpacing.xs + 2),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: AppColors.kColorGray500,
-                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.kPrimaryColor
+                                          .withOpacity(0.4),
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      spreadRadius: -2.0,
+                                      blurRadius: 6.0,
+                                    ),
+                                  ],
                                 ),
                                 child: Icon(
                                   PhosphorIcons.minus(),
@@ -140,12 +150,21 @@ class CartItemCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(100),
                               onTap: onIncrement,
                               child: Container(
-                                padding: const EdgeInsets.all(AppSpacing.xs),
+                                padding:
+                                    const EdgeInsets.all(AppSpacing.xs + 2),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: AppColors.kColorGray500,
-                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.kGreenColor
+                                          .withOpacity(0.4),
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      spreadRadius: -2.0,
+                                      blurRadius: 6.0,
+                                    ),
+                                  ],
                                 ),
                                 child: Icon(
                                   PhosphorIcons.plus(),
@@ -158,18 +177,26 @@ class CartItemCard extends StatelessWidget {
                         ),
                         // delete button
                         InkWell(
-                          borderRadius: BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(AppSpacing.sm),
                           onTap: onDelete,
                           child: Container(
                             padding: const EdgeInsets.all(AppSpacing.xs),
                             decoration: BoxDecoration(
-                              color: AppColors.kColorGray100,
-                              shape: BoxShape.circle,
+                              borderRadius:
+                                  BorderRadius.circular(AppSpacing.sm),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.kRedColor.withOpacity(0.4),
+                                ),
+                                BoxShadow(
+                                  color: Colors.white,
+                                  spreadRadius: -4.0,
+                                  blurRadius: 10.0,
+                                ),
+                              ],
                             ),
-                            child: Icon(
-                              PhosphorIcons.trashSimple(),
-                              color: Colors.redAccent,
-                              size: AppSpacing.xlg,
+                            child: Assets.svg.delete.svg(
+                              color: AppColors.kRedColor,
                             ),
                           ),
                         ),

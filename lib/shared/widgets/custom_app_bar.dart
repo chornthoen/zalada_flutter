@@ -43,8 +43,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.all(AppSpacing.sm),
               child: Icon(
                 PhosphorIcons.arrowLeft(),
+                // IconlyLight.arrowLeft2,
+                // Icons.arrow_back_ios,
                 color: Colors.black.withOpacity(0.9),
-                size: 20,
+                size: 22,
               ),
             ),
           ),

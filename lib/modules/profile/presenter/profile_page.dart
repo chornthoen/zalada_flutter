@@ -1,24 +1,23 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/change_password/page/change_password_page.dart';
 import 'package:zalada_flutter/modules/authentication/login/pages/login_page.dart';
-import 'package:zalada_flutter/modules/orders/presenter/address_page.dart';
 import 'package:zalada_flutter/modules/profile/models/model_language.dart';
 import 'package:zalada_flutter/modules/profile/presenter/about_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/edite_profile_page.dart';
-import 'package:zalada_flutter/modules/profile/presenter/order_history_page.dart';
-import 'package:zalada_flutter/modules/profile/presenter/payment_method.dart';
 import 'package:zalada_flutter/modules/profile/presenter/privacy_policy_page.dart';
-import 'package:zalada_flutter/modules/profile/widgets/button_logout.dart';
 import 'package:zalada_flutter/modules/profile/widgets/item_language.dart';
 import 'package:zalada_flutter/modules/profile/widgets/item_profile.dart';
 import 'package:zalada_flutter/modules/profile/widgets/my_profile.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_dialog.dart';
+
+import '../../../gen/assets.gen.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -34,9 +33,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.kBackgroundColor,
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,15 +57,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.all(AppSpacing.sm),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.5),
-                    width: 1,
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.kColorGray500.withOpacity(0.4),
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      spreadRadius: -4.0,
+                      blurRadius: 10.0,
+                    ),
+                  ],
                 ),
-                child: Icon(
-                  PhosphorIconsRegular.pencilSimpleLine,
-                  color: Colors.black.withOpacity(0.9),
-                  size: 20,
+                child: Assets.svg.edit.svg(
+                  color: AppColors.kPrimaryColor,
                 ),
               ),
             ),
@@ -78,21 +81,22 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            MyProfile(
-              imageUrl:
-                  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg/1200px-Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
-              name: 'Rose',
-              email: 'rose@gmail.com',
-            ),
-            const SizedBox(height: AppSpacing.lg),
-            // MyOrders(
-            //   onTap: () {
-            //     context.push(ViewOrderPage.routePath, extra: '2');
-            //   },
-            // ),
-            Divider(
-              color: AppColors.kColorGray200,
-              thickness: 4,
+            Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.md,
+              ),
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: AppColors.kWhiteColor,
+                borderRadius: BorderRadius.circular(AppSpacing.sm),
+              ),
+              child: MyProfile(
+                imageUrl:
+                    'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
+                name: 'Chorn THOEN',
+                email: 'thoenchorn@gmail.com',
+              ),
             ),
             Container(
               width: double.infinity,
@@ -108,115 +112,124 @@ class _ProfilePageState extends State<ProfilePage> {
                     'Account Settings',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: AppColors.kGreyColor,
+                          color: AppColors.kPrimaryColor,
                         ),
                   ),
-                  const SizedBox(height: AppSpacing.md),
-                  ItemProfile(
-                    title: 'Address',
-                    icon: PhosphorIconsRegular.mapPin,
-                    onTap: () {
-                      context.push(AddressPage.routePath);
-                    },
-                  ),
-                  ItemProfile(
-                    title: 'PaymentMethod',
-                    icon: PhosphorIconsRegular.creditCard,
-                    onTap: () {
-                      context.push(PaymentMethodProfilePage.routePath);
-                    },
-                  ),
-                  ItemProfile(
-                    title: 'Order History',
-                    icon: PhosphorIconsRegular.clock,
-                    onTap: () {
-                      context.push(OrderHistoryPage.routePath);
-                    },
-                  ),
-                  ItemProfile(
-                    title: 'Notification',
-                    icon: PhosphorIconsRegular.bell,
-                    trailing: Switch(
-                      value: isSwitched,
-                      onChanged: (value) {
-                        setState(() {
-                          isSwitched = value;
-                        });
-                      },
+                  SizedBox(height: AppSpacing.md),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.kWhiteColor,
+                      borderRadius: BorderRadius.circular(AppSpacing.sm),
+                    ),
+                    child: Column(
+                      children: [
+                        ItemProfile(
+                          title: 'Address',
+                          icon: IconlyLight.location,
+                          onPressed: () {},
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'Payment Method',
+                          icon: PhosphorIconsRegular.creditCard,
+                          onPressed: () {
+                            context.push(ChangePasswordPage.routePath);
+                          },
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'History',
+                          icon: IconlyLight.timeSquare,
+                          onPressed: () {},
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'Notification',
+                          icon: IconlyLight.notification,
+                          onPressed: () {},
+                          trailing: Switch(
+                            value: isSwitched,
+                            onChanged: (value) {
+                              setState(() {
+                                isSwitched = value;
+                              });
+                            },
+                            activeColor: AppColors.kPrimaryColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            Divider(
-              color: AppColors.kColorGray200,
-              thickness: 4,
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md,
-                vertical: AppSpacing.sm,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                  const SizedBox(height: AppSpacing.md),
                   Text(
                     'General',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                          color: AppColors.kGreyColor,
+                          color: AppColors.kPrimaryColor,
                         ),
+                  ),
+                  SizedBox(height: AppSpacing.md),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.kWhiteColor,
+                      borderRadius: BorderRadius.circular(AppSpacing.sm),
+                    ),
+                    child: Column(
+                      children: [
+                        ItemProfile(
+                          title: 'Change Language',
+                          icon: PhosphorIconsLight.globe,
+                          onPressed: () {},
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'Change Password',
+                          icon: PhosphorIconsRegular.password,
+                          onPressed: () {},
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'Help & Support',
+                          icon: PhosphorIconsLight.question,
+                          onPressed: () {},
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'Privacy Policy',
+                          icon: PhosphorIconsRegular.lockKey,
+                          onPressed: () {
+                            context.push(PrivacyPolicyPage.routePath);
+                          },
+                        ),
+                        const CustomDivider(),
+                        ItemProfile(
+                          title: 'About Us',
+                          icon: PhosphorIconsRegular.info,
+                          onPressed: () {
+                            context.push(AboutPage.routePath);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   ItemProfile(
-                    title: 'Language',
-                    icon: PhosphorIconsRegular.translate,
-                    onTap: () {
-                      selectLanguage();
+                    title: 'Logout',
+                    icon: IconlyLight.logout,
+                    onPressed: () {
+                      CustomDialog.showDialogCustom(
+                        context,
+                        title: 'Logout',
+                        content: 'Are you sure you want to logout?',
+                        ok: () => context.go(LoginPage.routePath),
+                        okText: 'Logout',
+                      );
                     },
-                  ),
-                  ItemProfile(
-                    title: 'Password',
-                    icon: PhosphorIconsRegular.password,
-                    onTap: () {
-                      context.push(ChangePasswordPage.routePath);
-                    },
-                  ),
-                  ItemProfile(
-                    title: 'Privacy Policy',
-                    icon: PhosphorIconsRegular.lockKey,
-                    onTap: () {
-                      context.push(PrivacyPolicyPage.routePath);
-                    },
-                  ),
-                  ItemProfile(
-                    title: 'About Us',
-                    icon: PhosphorIconsRegular.info,
-                    onTap: () {
-                      context.push(AboutPage.routePath);
-                    },
+                    color: AppColors.kRedColor,
                   ),
                 ],
               ),
             ),
-            Divider(
-              color: AppColors.kColorGray200,
-              thickness: 4,
-            ),
-            ButtonLogOut(
-              onTap: () {
-                CustomDialog.showDialogCustom(
-                  context,
-                  title: 'Logout',
-                  content: 'Are you sure you want to logout?',
-                  ok: () => context.go(LoginPage.routePath),
-                  okText: 'Logout',
-                );
-              },
-            )
           ],
         ),
       ),

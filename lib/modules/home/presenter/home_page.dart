@@ -46,9 +46,9 @@ class _HomePageState extends State<HomePage>
         automaticallyImplyLeading: false,
         toolbarHeight: 72,
         title: ProfileHomePage(
-          name: 'Rosé',
+          name: 'Chorn THOEN',
           image:
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg/1200px-Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
+              'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
           cartCount: 2,
           notificationCount: 3,
           onCartPressed: () {
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               SectionTitle(
-                title: 'Popular Products',
+                title: 'Popular Products 🥇',
                 action: 'See all',
                 onAction: () {
                   context.push(SeeAllCategoriesPage.routePath);

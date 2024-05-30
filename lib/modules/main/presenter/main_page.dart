@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/components/bottom_nav_item.dart';
+import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/modules/home/presenter/home_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/profile_page.dart';
 import 'package:zalada_flutter/modules/wishlist/presenter/wishlist_page.dart';
@@ -38,25 +38,30 @@ class _MainPageState extends State<MainPage>
 
   final bottomNavItems = [
     {
-      'icon': PhosphorIcons.houseSimple(),
+      'icon': Assets.svg.homeLight.path,
+      'iconSelected': Assets.svg.homeBulk.path,
       'label': 'Home',
     },
     {
-      'icon': PhosphorIcons.magnifyingGlass(),
+      'icon': Assets.svg.searchLight.path,
+      'iconSelected': Assets.svg.searchBulk.path,
       'label': 'Search',
     },
     {
-      'icon': PhosphorIcons.heart(),
+      'icon': Assets.svg.heartLight.path,
+      'iconSelected': Assets.svg.heartBulk.path,
       'label': 'Wishlist',
       'badge': true,
     },
     {
-      'icon': PhosphorIcons.shoppingBag(),
+      'icon': Assets.svg.buyLight.path,
+      'iconSelected': Assets.svg.buyBulk.path,
       'label': 'Cart',
       'badge': true,
     },
     {
-      'icon': PhosphorIcons.user(),
+      'icon': Assets.svg.profileLight.path,
+      'iconSelected': Assets.svg.profileBulk.path,
       'label': 'Profile',
     },
   ];
@@ -138,7 +143,8 @@ class _MainPageState extends State<MainPage>
               (index) {
                 final item = bottomNavItems[index];
                 return BottomNavItem(
-                  icon: item['icon'] as IconData,
+                  icon: item['icon'] as String,
+                  iconSelected: item['iconSelected'] as String,
                   selected: selectedIndex == index,
                   label: item['label'] as String,
                   badgeCount: item['badge'] == true && index == 3 ? 2 : 0,

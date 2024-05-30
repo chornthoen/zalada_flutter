@@ -90,6 +90,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             controller: pageController,
             onPageChanged: (value) {
               setState(() {
+                Future.delayed(const Duration(milliseconds: 400));
                 currentIndex = value;
               });
             },
@@ -142,7 +143,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               pageController: pageController,
               onPressed: () {
                 pageController.nextPage(
-                  duration: const Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 400),
                   curve: Curves.easeIn,
                 );
                 if (currentIndex == 2) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/modules/authentication/forget_password/page/forget_password_page.dart';
 import 'package:zalada_flutter/modules/authentication/register/page/register_page.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/custom_button_social_media.dart';
@@ -86,14 +87,12 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText = !obscureText;
                       });
                     },
-                    suffix: obscureText
-                        ? PhosphorIconsRegular.eye
-                        : PhosphorIconsRegular.eyeSlash,
+                    suffixIcon: SvgPicture.asset(
+                      obscureText ? Assets.svg.hide.path : Assets.svg.show.path,
+                      color: AppColors.kPrimaryColor,
+                    ),
                     label: 'Password',
                     obscureText: obscureText,
-                    onSubmitted: (value) {
-                      context.push(MainPage.routePath);
-                    },
                   ),
                   SizedBox(height: AppSpacing.sm),
                   Align(
@@ -125,19 +124,19 @@ class _LoginPageState extends State<LoginPage> {
                   CustomButtonSocialMedia(
                     onTap: () {},
                     text: 'Continue with Apple',
-                    icon: 'assets/svg/apple.svg',
+                    icon: Assets.svg.apple.path,
                   ),
                   SizedBox(height: AppSpacing.md),
                   CustomButtonSocialMedia(
                     onTap: () {},
                     text: 'Continue with Google',
-                    icon: 'assets/svg/google.svg',
+                    icon: Assets.svg.google.path,
                   ),
                   SizedBox(height: AppSpacing.md),
                   CustomButtonSocialMedia(
                     onTap: () {},
                     text: 'Continue with Facebook',
-                    icon: 'assets/svg/facebook.svg',
+                    icon: Assets.svg.facebook.path,
                   ),
                   SizedBox(height: AppSpacing.md),
                   DoNotAccount(
@@ -156,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<void> _authenticate() async {
+  Future<void> authenticate() async {
     try {
       bool isAuthenticated = await localAuth.authenticate(
         localizedReason: 'Please authenticate to show account balance',
@@ -169,7 +168,6 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           obscureText = !obscureText;
         });
-        // context.push(MainPage.routePath);
       }
     } catch (e) {
       print(e);

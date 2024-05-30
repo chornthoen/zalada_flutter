@@ -51,15 +51,26 @@ class MenuCategories extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: AppColors.kColorGray300,
-                    child: Icon(
-                      categories[index].icon,
-                      color: Theme.of(context).primaryColor,
-                      size: AppSpacing.xlg,
-                    ),
-                  ),
+                  Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.kColorGray500,
+                          ),
+                          BoxShadow(
+                            color: Colors.white,
+                            spreadRadius: -2.0,
+                            blurRadius: 12.0,
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        categories[index].icon,
+                        color: Theme.of(context).primaryColor,
+                        size: AppSpacing.xlg,
+                      )),
                   const SizedBox(height: AppSpacing.xs),
                   Text(
                     categories[index].name,

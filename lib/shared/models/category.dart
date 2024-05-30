@@ -4,8 +4,6 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 class Category {
   final String name;
 
-  @Deprecated(
-      'Use iconData instead,This is will be removed in the next version v2.0')
   final IconData icon;
 
   const Category({

@@ -34,6 +34,8 @@ class CircularWidget extends StatelessWidget {
             progressColor: AppColors.kPrimaryColor,
             backgroundColor: AppColors.kColorGray300,
             circularStrokeCap: CircularStrokeCap.round,
+            restartAnimation: true,
+            animationDuration: 1000,
             center: Container(
               padding: const EdgeInsets.all(AppSpacing.sm),
               decoration: BoxDecoration(

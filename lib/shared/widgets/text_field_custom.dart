@@ -14,6 +14,8 @@ class TextFieldCustom extends StatefulWidget {
     this.keyboardType,
     this.textInputAction = TextInputAction.done,
     this.onSubmitted,
+    this.enabled = true,
+    this.suffixIcon,
     super.key,
   });
 
@@ -27,6 +29,8 @@ class TextFieldCustom extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final Function(String)? onSubmitted;
+  final bool? enabled;
+  final Widget? suffixIcon;
 
   @override
   State<TextFieldCustom> createState() => _TextFieldCustomState();
@@ -76,7 +80,7 @@ class _TextFieldCustomState extends State<TextFieldCustom>
       child: Theme(
         data: ThemeData(
           colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: AppColors.kBlackColor,
+                primary: AppColors.kPrimaryColor,
               ),
         ),
         child: CustomPaint(
@@ -84,21 +88,56 @@ class _TextFieldCustomState extends State<TextFieldCustom>
           child: TextField(
             onSubmitted: widget.onSubmitted,
             focusNode: focusNode,
+            enabled: widget.enabled,
             textInputAction: widget.textInputAction,
             controller: widget.controller,
             keyboardType: widget.keyboardType,
             obscureText: widget.obscureText!,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
             decoration: InputDecoration(
-              label: Text(widget.label),
+              label: Text(
+                widget.label,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: focusNode.hasFocus
+                          ? AppColors.kPrimaryColor
+                          : AppColors.kColorGray600,
+                    ),
+              ),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,
                 vertical: 6,
               ),
-              suffixIcon: IconButton(
-                onPressed: widget.onSuffixTap,
-                icon: Icon(widget.suffix),
+              suffixIconConstraints: const BoxConstraints(
+                minWidth: 24,
+                minHeight: 24,
               ),
+              suffixIconColor: focusNode.hasFocus
+                  ? AppColors.kPrimaryColor
+                  : AppColors.kRedColor,
+              suffixIcon: Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: widget.onSuffixTap,
+                    child: widget.suffixIcon == null
+                        ? Icon(
+                            widget.suffix,
+                            color: focusNode.hasFocus
+                                ? AppColors.kPrimaryColor
+                                : AppColors.kColorGray600,
+                          )
+                        : widget.suffixIcon!),
+              ),
+              // suffixIcon: IconButton(
+              //   onPressed: widget.onSuffixTap,
+              //   icon: Icon(widget.suffix),
+              //   color: focusNode.hasFocus
+              //       ? AppColors.kPrimaryColor
+              //       : AppColors.kColorGray600,
+              // ),
               prefixIcon: widget.isPhone == null
                   ? null
                   : InkWell(

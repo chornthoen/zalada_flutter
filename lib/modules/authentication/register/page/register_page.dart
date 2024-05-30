@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/custom_button_social_media.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/do_not_account.dart';
 import 'package:zalada_flutter/modules/authentication/widgets/or_continue_with.dart';
+import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
@@ -78,9 +81,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         obscureText = !obscureText;
                       });
                     },
-                    suffix: obscureText
-                        ? PhosphorIconsRegular.eye
-                        : PhosphorIconsRegular.eyeSlash,
+                    suffixIcon: SvgPicture.asset(
+                      obscureText ? Assets.svg.hide.path : Assets.svg.show.path,
+                      color: AppColors.kPrimaryColor,
+                    ),
                     label: 'Password',
                     obscureText: obscureText,
                     textInputAction: TextInputAction.next,
@@ -93,9 +97,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         obscureTextConfirm = !obscureTextConfirm;
                       });
                     },
-                    suffix: obscureTextConfirm
-                        ? PhosphorIconsRegular.eye
-                        : PhosphorIconsRegular.eyeSlash,
+                    suffixIcon: SvgPicture.asset(
+                      obscureTextConfirm
+                          ? Assets.svg.hide.path
+                          : Assets.svg.show.path,
+                      color: AppColors.kPrimaryColor,
+                    ),
                     label: 'Confirm Password',
                     obscureText: obscureTextConfirm,
                   ),

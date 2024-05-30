@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 
@@ -48,7 +48,7 @@ class ProfileHomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hello,',
+                    'Hello 👋',
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontSize: 14,
@@ -78,12 +78,20 @@ class ProfileHomePage extends StatelessWidget {
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.kColorGray300,
                       shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.kColorGray400,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          spreadRadius: -2.0,
+                          blurRadius: 12.0,
+                        ),
+                      ],
                     ),
                     padding: const EdgeInsets.all(AppSpacing.sm),
-                    child: Icon(
-                      PhosphorIcons.shoppingCartSimple(),
+                    child: Assets.svg.buyBulk.svg(
                       color: AppColors.kPrimaryColor,
                     ),
                   ),
@@ -102,12 +110,21 @@ class ProfileHomePage extends StatelessWidget {
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.kColorGray300,
+                      // color: AppColors.kColorGray300,
                       shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.kColorGray400,
+                        ),
+                        BoxShadow(
+                          color: Colors.white,
+                          spreadRadius: -2.0,
+                          blurRadius: 12.0,
+                        ),
+                      ],
                     ),
                     padding: const EdgeInsets.all(AppSpacing.sm),
-                    child: Icon(
-                      PhosphorIcons.bellSimple(),
+                    child: Assets.svg.notifications.svg(
                       color: AppColors.kPrimaryColor,
                     ),
                   ),

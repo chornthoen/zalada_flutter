@@ -11,6 +11,7 @@ import 'package:zalada_flutter/modules/product/widgets/payment_add_to_cart.dart'
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
+import 'package:zalada_flutter/shared/widgets/custom_bottom_sheet.dart';
 import 'package:zalada_flutter/shared/widgets/custom_dialog.dart';
 
 import 'address_page.dart';
@@ -286,7 +287,10 @@ class _OrdersPageState extends State<OrdersPage> {
             okText: 'Confirm',
             ok: () {
               context.pop();
-              context.push(PaymentKHQRCodePage.routePath);
+              CustomBottomSheet.showBottomSheetSuccess(
+                context: context,
+                onPressed: () {},
+              );
             },
           );
         },

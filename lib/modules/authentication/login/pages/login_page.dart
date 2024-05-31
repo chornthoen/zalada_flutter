@@ -12,7 +12,7 @@ import 'package:zalada_flutter/modules/main/presenter/main_page.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class LoginPage extends StatefulWidget {
@@ -36,8 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     passwordController = TextEditingController();
     localAuth = LocalAuthentication();
     localAuth.isDeviceSupported().then((value) {
-      setState(() {
-      });
+      setState(() {});
     });
     super.initState();
   }
@@ -113,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: AppSpacing.lg),
-                  CustomElevated(
+                  FilledButtonCustom(
                     onPressed: () {
                       context.push(MainPage.routePath);
                     },

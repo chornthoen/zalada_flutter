@@ -4,7 +4,7 @@ import 'package:zalada_flutter/modules/authentication/otp/page/otp_page.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: AppSpacing.xlg),
-                CustomElevated(
+                FilledButtonCustom(
                   onPressed: () {
                     context.push(
                       OTPPage.routePath,

@@ -25,11 +25,11 @@ class BottomNavItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      borderRadius: BorderRadius.circular(AppSpacing.sm),
+      borderRadius: BorderRadius.circular(AppSpacing.xs),
       child: Container(
         constraints: BoxConstraints(
-          minWidth: 68,
-          minHeight: 68,
+          minWidth: 70,
+          minHeight: 70,
         ),
         child: Ink(
           decoration: BoxDecoration(
@@ -110,7 +110,7 @@ class BottomNavItem extends StatelessWidget {
                   label,
                   style: TextStyle(
                     color: selected
-                        ? Theme.of(context).primaryColor
+                        ? AppColors.kPrimaryColor
                         : AppColors.kColorGray600,
                     fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                     fontSize: selected ? 12.5 : 12,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zalada_flutter/gen/assets.gen.dart';
+import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class ChangePasswordPage extends StatefulWidget {
@@ -62,9 +64,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureTextOld = !obscureTextOld;
                   });
                 },
-                suffix: obscureTextOld
-                    ? PhosphorIconsRegular.eye
-                    : PhosphorIconsRegular.eyeSlash,
+                suffixIcon: SvgPicture.asset(
+                  obscureTextOld ? Assets.svg.hide.path : Assets.svg.show.path,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.kPrimaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               SizedBox(height: AppSpacing.xlg),
               TextFieldCustom(
@@ -76,9 +82,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureTextNew = !obscureTextNew;
                   });
                 },
-                suffix: obscureTextNew
-                    ? PhosphorIconsRegular.eye
-                    : PhosphorIconsRegular.eyeSlash,
+                suffixIcon: SvgPicture.asset(
+                  obscureTextNew ? Assets.svg.hide.path : Assets.svg.show.path,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.kPrimaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               SizedBox(height: AppSpacing.xlg),
               TextFieldCustom(
@@ -90,12 +100,18 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     obscureTextConfirm = !obscureTextConfirm;
                   });
                 },
-                suffix: obscureTextConfirm
-                    ? PhosphorIconsRegular.eye
-                    : PhosphorIconsRegular.eyeSlash,
+                suffixIcon: SvgPicture.asset(
+                  obscureTextConfirm
+                      ? Assets.svg.hide.path
+                      : Assets.svg.show.path,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.kPrimaryColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               SizedBox(height: AppSpacing.xxxlg),
-              CustomElevated(
+              FilledButtonCustom(
                 onPressed: () {},
                 text: 'Save Changes',
               ),

@@ -42,13 +42,26 @@ class CartItemCard extends StatelessWidget {
       margin: const EdgeInsets.only(
         bottom: AppSpacing.md,
       ),
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.kWhiteColor,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.kColorGray100,
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 4),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(AppSpacing.lg),
+      ),
       child: Column(
         children: [
           Row(
             children: [
               Checkbox(
                 splashRadius: AppSpacing.lg,
-                activeColor: AppColors.kOrangeColor,
+                activeColor: AppColors.kPrimaryColor,
                 side: BorderSide(
                   color: AppColors.kColorGray500,
                 ),
@@ -92,13 +105,7 @@ class CartItemCard extends StatelessWidget {
                     const SizedBox(height: AppSpacing.sm),
                     Row(
                       children: [
-                        Text(
-                          '\$$price',
-                          style:
-                              Theme.of(context).textTheme.titleSmall!.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                        ),
+                        NumberTotalAnimate(total: price.toString()),
                         const SizedBox(width: AppSpacing.sm),
                         Text(
                           '\$$originalPrice',
@@ -126,8 +133,7 @@ class CartItemCard extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: AppColors.kPrimaryColor
-                                          .withOpacity(0.4),
+                                      color: AppColors.kColorGray300,
                                     ),
                                     BoxShadow(
                                       color: Colors.white,
@@ -156,8 +162,7 @@ class CartItemCard extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: AppColors.kGreenColor
-                                          .withOpacity(0.4),
+                                      color: AppColors.kColorGray300,
                                     ),
                                     BoxShadow(
                                       color: Colors.white,
@@ -186,7 +191,7 @@ class CartItemCard extends StatelessWidget {
                                   BorderRadius.circular(AppSpacing.sm),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.kRedColor.withOpacity(0.4),
+                                  color: AppColors.kRedColor.withOpacity(0.3),
                                 ),
                                 BoxShadow(
                                   color: Colors.white,
@@ -207,11 +212,6 @@ class CartItemCard extends StatelessWidget {
               ),
               SizedBox(width: AppSpacing.lg),
             ],
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Divider(
-            color: AppColors.kColorGray300,
-            thickness: 1,
           ),
         ],
       ),

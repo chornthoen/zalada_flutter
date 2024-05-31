@@ -18,23 +18,20 @@ class CustomCheckoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 50,
       padding: EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
       ),
       child: Row(
         children: [
-          Text(
-            'Total: \$$total',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+          AnimationFlipCounter(
+            label: 'Total: \$',
+            total: total,
           ),
           const Spacer(),
           InkWell(
             splashColor: Colors.white,
-            borderRadius: BorderRadius.circular(AppSpacing.xxlg),
+            borderRadius: BorderRadius.circular(AppSpacing.sm),
             onTap: onPressed,
             child: Container(
               padding: const EdgeInsets.symmetric(
@@ -43,7 +40,7 @@ class CustomCheckoutButton extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: AppColors.kPrimaryColor,
-                borderRadius: BorderRadius.circular(AppSpacing.xxlg),
+                borderRadius: BorderRadius.circular(AppSpacing.sm),
               ),
               child: Row(
                 children: [
@@ -55,19 +52,19 @@ class CustomCheckoutButton extends StatelessWidget {
                           color: Colors.white,
                         ),
                   ),
-                  if (quantity != 0)
-                    Container(
-                      margin: const EdgeInsets.only(left: AppSpacing.xs),
-                      padding: const EdgeInsets.all(AppSpacing.xs),
-                      decoration: BoxDecoration(
-                        color: AppColors.kGreyColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: NumberAnimated(
-                        quantity: quantity!,
-                        color: AppColors.kWhiteColor,
-                      ),
+                  Container(
+                    height: 20,
+                    width: 20,
+                    margin: const EdgeInsets.only(left: AppSpacing.xs),
+                    decoration: BoxDecoration(
+                      color: AppColors.kGreyColor,
+                      shape: BoxShape.circle,
                     ),
+                    child: NumberAnimated(
+                      quantity: quantity!,
+                      color: AppColors.kWhiteColor,
+                    ),
+                  ),
                 ],
               ),
             ),

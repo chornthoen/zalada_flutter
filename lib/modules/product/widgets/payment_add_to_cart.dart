@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
+import 'package:zalada_flutter/shared/widgets/number_animated.dart';
 
 class PaymentAddToCart extends StatelessWidget {
   const PaymentAddToCart({
@@ -39,13 +40,8 @@ class PaymentAddToCart extends StatelessWidget {
                   ),
             ),
           Spacer(),
-          Text(
-            '\$$value',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: AppColors.kBlackColor,
-                ),
+          NumberTotalAnimate(
+            total: value.toString(),
           ),
         ],
       ),

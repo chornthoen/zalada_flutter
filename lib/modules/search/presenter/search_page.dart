@@ -30,10 +30,10 @@ class _SearchPageState extends State<SearchPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Colors.grey[50],
+        backgroundColor: AppColors.kBackgroundColor,
         automaticallyImplyLeading: false,
         title: Container(
           margin: const EdgeInsets.only(
@@ -59,6 +59,7 @@ class _SearchPageState extends State<SearchPage>
           SizedBox(
             height: 44,
             child: TabBar(
+              dividerColor: Colors.transparent,
               indicatorPadding: EdgeInsets.zero,
               splashBorderRadius: BorderRadius.circular(AppSpacing.sm),
               isScrollable: true,

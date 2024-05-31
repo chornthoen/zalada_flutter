@@ -9,11 +9,13 @@ import 'package:zalada_flutter/gen/assets.gen.dart';
 import 'package:zalada_flutter/modules/home/presenter/home_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/profile_page.dart';
 import 'package:zalada_flutter/modules/wishlist/presenter/wishlist_page.dart';
+import 'package:zalada_flutter/shared/colors/app_color.dart';
 
 import '../../cart/presenter/cart_page.dart';
 import '../../search/presenter/search_page.dart';
 
 late PageController pageController;
+late ScrollController scrollController;
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -82,11 +84,13 @@ class _MainPageState extends State<MainPage>
         print('Connected');
       }
     });
+    scrollController = ScrollController();
   }
 
   @override
   void dispose() {
     listener.cancel();
+    // scrollController.dispose();
     super.dispose();
   }
 
@@ -115,6 +119,7 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        reverse: true,
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: _pages,
@@ -125,16 +130,16 @@ class _MainPageState extends State<MainPage>
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        surfaceTintColor: Colors.white,
-        color: Colors.white,
+        surfaceTintColor: AppColors.kWhiteColor,
+        color: AppColors.kWhiteColor,
         padding: EdgeInsets.zero,
         height: Platform.isIOS ? 65 : 75,
         child: Padding(
           padding: EdgeInsets.only(
-            right: 16,
-            left: 16,
+            right: 10,
+            left: 10,
             top: 10,
-            bottom: Platform.isIOS ? 0 : 10,
+            bottom: Platform.isIOS ? 1 : 10,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -151,6 +156,9 @@ class _MainPageState extends State<MainPage>
                   onPressed: () {
                     setState(() {
                       selectedIndex = index;
+                      pageController.animateToPage(index,
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.slowMiddle);
                       pageController.jumpToPage(index);
                     });
                   },

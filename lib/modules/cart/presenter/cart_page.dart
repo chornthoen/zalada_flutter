@@ -49,9 +49,10 @@ class _CartPageState extends State<CartPage>
     super.build(context);
     total = calculateTotalPrice();
     return Scaffold(
+      backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.kBackgroundColor,
         title: Text('Cart'),
         centerTitle: true,
         actions: [
@@ -69,137 +70,137 @@ class _CartPageState extends State<CartPage>
           const SizedBox(width: AppSpacing.lg),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSpacing.sm,
-        ),
-        child: LazyListView(
-          children: [
-            if (cartItems.isEmpty) const CartEmptyPage(),
-            if (cartItems.isNotEmpty) ...[
-              Row(
-                children: [
-                  Checkbox(
-                    splashRadius: AppSpacing.lg,
-                    activeColor: AppColors.kOrangeColor,
-                    side: BorderSide(
-                      color: AppColors.kColorGray500,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppSpacing.xs),
-                    ),
-                    value: cartItems.every((element) => element.selected),
-                    onChanged: (value) {
-                      setState(() {
-                        for (var item in cartItems) {
-                          item.selected = value!;
-                        }
-                      });
-                    },
+      body: LazyListView(
+        children: [
+          if (cartItems.isEmpty) const CartEmptyPage(),
+          if (cartItems.isNotEmpty) ...[
+            Row(
+              children: [
+                Checkbox(
+                  splashRadius: AppSpacing.lg,
+                  activeColor: AppColors.kPrimaryColor,
+                  side: BorderSide(
+                    color: AppColors.kColorGray500,
                   ),
-                  Text(
-                    'Select All products',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSpacing.xs),
                   ),
-                ],
-              ),
-            ],
-            ...List.generate(
-              cartItems.length,
-              (index) {
-                final item = cartItems[index];
-                return CartItemCard(
-                  imageUrl: item.imageUrl,
-                  title: item.title,
-                  price: item.price,
-                  originalPrice: item.originalPrice,
-                  quantity: item.quantity,
-                  onDelete: () {
-                    _confirmDelete(index);
-                  },
-                  selected: item.selected,
-                  onDecrement: () {
+                  value: cartItems.every((element) => element.selected),
+                  onChanged: (value) {
                     setState(() {
-                      if (item.quantity > 1) {
-                        item.price = item.price / item.quantity;
-                        item.quantity--;
+                      for (var item in cartItems) {
+                        item.selected = value!;
                       }
                     });
                   },
-                  onIncrement: () {
-                    setState(() {
-                      item.quantity++;
-                      item.price = item.price * item.quantity;
-                    });
-                  },
-                  onSelected: (value) {
-                    setState(() {
-                      item.selected = value!;
-                    });
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: AppSpacing.lg,
-                    bottom: AppSpacing.lg,
-                  ),
-                  child: Text(
-                    'Related Products',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
                 ),
-                SizedBox(
-                  height: 220,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: productWishlist.length,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ),
-                    itemBuilder: (context, index) {
-                      return ProductCard(
-                        size: AppSpacing.lg,
-                        title: productWishlist[index].title,
-                        image: productWishlist[index].image,
-                        status: productWishlist[index].status,
-                        originalPrice: productWishlist[index].originalPrice,
-                        salePrice: productWishlist[index].salePrice,
-                        type: productWishlist[index].type,
-                      );
-                    },
-                  ),
+                Text(
+                  'Select All products',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                 ),
               ],
             ),
           ],
-        ),
+          ...List.generate(
+            cartItems.length,
+            (index) {
+              final item = cartItems[index];
+              return CartItemCard(
+                imageUrl: item.imageUrl,
+                title: item.title,
+                price: item.price,
+                originalPrice: item.originalPrice,
+                quantity: item.quantity,
+                onDelete: () {
+                  _confirmDelete(index);
+                },
+                selected: item.selected,
+                onDecrement: () {
+                  setState(() {
+                    if (item.quantity > 1) {
+                      item.price = item.price / item.quantity;
+                      item.quantity--;
+                    }
+                  });
+                },
+                onIncrement: () {
+                  setState(() {
+                    item.quantity++;
+                    item.price = item.price * item.quantity;
+                  });
+                },
+                onSelected: (value) {
+                  setState(() {
+                    item.selected = value!;
+                  });
+                },
+              );
+            },
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: AppSpacing.lg,
+                  bottom: AppSpacing.lg,
+                ),
+                child: Text(
+                  'Related Products',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+              ),
+              SizedBox(
+                height: 220,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: productWishlist.length,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      size: AppSpacing.lg,
+                      title: productWishlist[index].title,
+                      image: productWishlist[index].image,
+                      status: productWishlist[index].status,
+                      originalPrice: productWishlist[index].originalPrice,
+                      salePrice: productWishlist[index].salePrice,
+                      type: productWishlist[index].type,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 400),
             height: cartItems.where((element) => element.selected).isNotEmpty
                 ? 60
                 : 0,
-            child: CustomCheckoutButton(
-              total: total.toString(),
-              quantity: cartItems.where((element) => element.selected).length,
-              onPressed: () {
-                context.push(OrdersPage.routePath);
-              },
+            child: Wrap(
+              children: [
+                CustomCheckoutButton(
+                  total: total.toString(),
+                  quantity:
+                      cartItems.where((element) => element.selected).length,
+                  onPressed: () {
+                    context.push(OrdersPage.routePath);
+                  },
+                ),
+              ],
             ),
           ),
         ],

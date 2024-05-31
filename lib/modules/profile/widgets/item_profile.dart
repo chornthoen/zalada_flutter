@@ -25,7 +25,7 @@ class ItemProfile extends StatelessWidget {
       style: FilledButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
         backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        foregroundColor: color ?? AppColors.kPrimaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.xs),
         ),

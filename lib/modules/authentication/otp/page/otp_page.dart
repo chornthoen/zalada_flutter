@@ -8,7 +8,7 @@ import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 
 class OTPPage extends StatefulWidget {
   const OTPPage({super.key, required this.email});
@@ -163,7 +163,7 @@ class _OTPPageState extends State<OTPPage> {
                   ],
                 ),
                 const SizedBox(height: AppSpacing.xlg),
-                CustomElevated(
+                FilledButtonCustom(
                   onPressed: () {
                     context.push(NewPasswordPage.routePath);
                   },

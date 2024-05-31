@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/main/presenter/main_page.dart';
 import 'package:zalada_flutter/modules/orders/presenter/orders_page.dart';
 import 'package:zalada_flutter/modules/product/models/model_detail.dart';
@@ -68,13 +68,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               padding: const EdgeInsets.all(AppSpacing.sm),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.grey.withOpacity(0.5),
-                  width: 1,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.kColorGray400,
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    spreadRadius: -2.0,
+                    blurRadius: 12.0,
+                  ),
+                ],
               ),
               child: Icon(
-                PhosphorIconsRegular.shoppingCartSimple,
+                IconlyLight.buy,
                 color: Colors.black.withOpacity(0.9),
                 size: 20,
               ),

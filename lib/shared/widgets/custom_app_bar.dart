@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -43,8 +44,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.all(AppSpacing.sm),
               child: Icon(
                 PhosphorIcons.arrowLeft(),
-                // IconlyLight.arrowLeft2,
-                // Icons.arrow_back_ios,
                 color: Colors.black.withOpacity(0.9),
                 size: 22,
               ),
@@ -70,10 +69,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.all(AppSpacing.sm),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.5),
-                    width: 1,
-                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.kColorGray400,
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      spreadRadius: -2.0,
+                      blurRadius: 12.0,
+                    ),
+                  ],
                 ),
                 child: Icon(
                   icon,

@@ -6,7 +6,7 @@ import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_bottom_sheet.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class NewPasswordPage extends StatefulWidget {
@@ -96,7 +96,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                       : PhosphorIconsRegular.eyeSlash,
                 ),
                 const SizedBox(height: AppSpacing.xlg),
-                CustomElevated(
+                FilledButtonCustom(
                   onPressed: () {
                     CustomBottomSheet.showBottomSheetSuccess(
                       context: context,

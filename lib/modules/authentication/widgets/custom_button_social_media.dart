@@ -18,7 +18,7 @@ class CustomButtonSocialMedia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(AppSpacing.xxlg),
+      borderRadius: BorderRadius.circular(AppSpacing.sm),
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -30,7 +30,7 @@ class CustomButtonSocialMedia extends StatelessWidget {
             color: AppColors.kGreyColor,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(AppSpacing.xxlg),
+          borderRadius: BorderRadius.circular(AppSpacing.sm),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

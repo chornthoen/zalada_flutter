@@ -34,6 +34,7 @@ class SectionTitle extends StatelessWidget {
                   action ?? '',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w600,
                       ),
                 ),
               ),

@@ -27,13 +27,13 @@ class _WishListPageState extends State<WishListPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kWhiteColor,
+      backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: AppColors.kWhiteColor,
+        backgroundColor: AppColors.kBackgroundColor,
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          'YourWishlist',
+          'Wishlist',
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.kPrimaryColor,
@@ -48,6 +48,7 @@ class _WishListPageState extends State<WishListPage>
             height: 44,
             child: TabBar(
               indicatorPadding: EdgeInsets.zero,
+              dividerColor: Colors.transparent,
               splashBorderRadius: BorderRadius.circular(AppSpacing.sm),
               isScrollable: true,
               controller: tabController,

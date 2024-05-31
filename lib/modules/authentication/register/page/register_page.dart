@@ -8,7 +8,7 @@ import 'package:zalada_flutter/modules/authentication/widgets/or_continue_with.d
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -112,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: obscureTextConfirm,
                   ),
                   SizedBox(height: AppSpacing.xxlg),
-                  CustomElevated(
+                  FilledButtonCustom(
                     onPressed: () {},
                     text: 'Register',
                   ),

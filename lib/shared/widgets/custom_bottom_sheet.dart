@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 
 class CustomBottomSheet {
   static void showBottomSheetSuccess({
@@ -48,7 +49,7 @@ class CustomBottomSheet {
                     ),
               ),
               const SizedBox(height: AppSpacing.lg),
-              CustomElevated(
+              FilledButtonCustom(
                 onPressed: onPressed,
                 text: 'Continue',
               ),

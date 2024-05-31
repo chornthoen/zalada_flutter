@@ -30,6 +30,7 @@ dependencies:
   khqr_widget: ^1.0.7
   mobile_scanner: ^4.0.1
   flutter_iconly: ^1.0.2
+  animated_flip_counter: ^0.3.4
 #  google_maps_flutter: ^2.5.3
 #  geolocator: ^11.0.0
 

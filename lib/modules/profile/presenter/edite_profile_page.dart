@@ -4,7 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
 class EditeProfilePage extends StatefulWidget {
@@ -52,94 +52,96 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: CustomAppBar(title: 'Edite Profile'),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.lg,
-          ),
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Stack(
-                      children: [
-                        ClipOval(
-                          child: Image.network(
-                            'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(AppSpacing.xs),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(AppSpacing.xs),
-                              color: AppColors.kPrimaryColor.withOpacity(0.8),
-                            ),
-                            child: Icon(
-                              PhosphorIconsRegular.pencilSimpleLine,
-                              color: AppColors.kWhiteColor,
-                              size: AppSpacing.xlg,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg,
+            ),
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Stack(
+                        children: [
+                          ClipOval(
+                            child: Image.network(
+                              'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              padding: const EdgeInsets.all(AppSpacing.xs),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(AppSpacing.xs),
+                                color: AppColors.kPrimaryColor.withOpacity(0.8),
+                              ),
+                              child: Icon(
+                                PhosphorIconsRegular.pencilSimpleLine,
+                                color: AppColors.kWhiteColor,
+                                size: AppSpacing.xlg,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: AppSpacing.xlg),
-                  TextFieldCustom(
-                    controller: fullNameController,
-                    label: 'Full Name',
-                    keyboardType: TextInputType.name,
-                  ),
-                  const SizedBox(height: AppSpacing.xlg),
-                  TextFieldCustom(
-                    label: 'Email Address',
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: AppSpacing.xlg),
-                  TextFieldCustom(
-                    label: 'Date of Birth',
-                    controller: dateOfBirthController,
-                    suffix: PhosphorIconsRegular.calendar,
-                    onSuffixTap: selectDate,
-                  ),
-                  const SizedBox(height: AppSpacing.xlg),
-                  TextFieldCustom(
-                    label: 'Phone Number',
-                    controller: phoneNumberController,
-                    keyboardType: TextInputType.phone,
-                  ),
-                  const SizedBox(height: AppSpacing.xlg),
-                  GestureDetector(
-                    onTap: () {
-                      DropdownMenuItem<String>(
-                        value: selectedGender,
-                        child: Text(selectedGender!),
-                      );
-                    },
-                    child: TextFieldCustom(
-                      label: 'Gender',
-                      enabled: false,
-                      controller: genderController,
-                      suffix: PhosphorIconsRegular.caretDown,
-                      onSuffixTap: () {
+                    const SizedBox(height: AppSpacing.xlg),
+                    TextFieldCustom(
+                      controller: fullNameController,
+                      label: 'Full Name',
+                      keyboardType: TextInputType.name,
+                    ),
+                    const SizedBox(height: AppSpacing.xlg),
+                    TextFieldCustom(
+                      label: 'Email Address',
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: AppSpacing.xlg),
+                    TextFieldCustom(
+                      label: 'Date of Birth',
+                      controller: dateOfBirthController,
+                      suffix: PhosphorIconsRegular.calendar,
+                      onSuffixTap: selectDate,
+                    ),
+                    const SizedBox(height: AppSpacing.xlg),
+                    TextFieldCustom(
+                      label: 'Phone Number',
+                      controller: phoneNumberController,
+                      keyboardType: TextInputType.phone,
+                    ),
+                    const SizedBox(height: AppSpacing.xlg),
+                    GestureDetector(
+                      onTap: () {
                         DropdownMenuItem<String>(
                           value: selectedGender,
                           child: Text(selectedGender!),
                         );
                       },
+                      child: TextFieldCustom(
+                        label: 'Gender',
+                        enabled: false,
+                        controller: genderController,
+                        suffix: PhosphorIconsRegular.caretDown,
+                        onSuffixTap: () {
+                          DropdownMenuItem<String>(
+                            value: selectedGender,
+                            child: Text(selectedGender!),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -147,9 +149,9 @@ class _EditeProfilePageState extends State<EditeProfilePage> {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
-            vertical: AppSpacing.lg,
+            vertical: AppSpacing.xlg,
           ),
-          child: CustomElevated(
+          child: FilledButtonCustom(
             onPressed: () {
               Navigator.of(context).pop();
             },

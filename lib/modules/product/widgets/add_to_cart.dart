@@ -7,7 +7,8 @@ import 'package:zalada_flutter/modules/product/widgets/payment_add_to_cart.dart'
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/button_circle.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
+import 'package:zalada_flutter/shared/widgets/number_animated.dart';
 
 class AddToCart extends StatefulWidget {
   const AddToCart({
@@ -161,15 +162,8 @@ class _AddToCartState extends State<AddToCart> {
                             const SizedBox(height: AppSpacing.sm),
                             Row(
                               children: [
-                                Text(
-                                  '\$$price',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.kColorBlue,
-                                      ),
+                                NumberTotalAnimate(
+                                  total: price.toString(),
                                 ),
                                 const SizedBox(width: AppSpacing.sm),
                                 Text(
@@ -205,9 +199,16 @@ class _AddToCartState extends State<AddToCart> {
                                             const EdgeInsets.all(AppSpacing.xs),
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: AppColors.kColorGray500,
-                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.kColorGray300,
+                                            ),
+                                            BoxShadow(
+                                              color: Colors.white,
+                                              spreadRadius: -2.0,
+                                              blurRadius: 6.0,
+                                            ),
+                                          ],
                                         ),
                                         child: Icon(
                                           PhosphorIcons.minus(),
@@ -217,7 +218,7 @@ class _AddToCartState extends State<AddToCart> {
                                       ),
                                     ),
                                     const SizedBox(width: AppSpacing.md),
-                                    Text('$quantity'),
+                                    NumberAnimated(quantity: quantity),
                                     const SizedBox(width: AppSpacing.md),
                                     InkWell(
                                       borderRadius: BorderRadius.circular(100),
@@ -232,9 +233,16 @@ class _AddToCartState extends State<AddToCart> {
                                             const EdgeInsets.all(AppSpacing.xs),
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: AppColors.kColorGray500,
-                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: AppColors.kColorGray300,
+                                            ),
+                                            BoxShadow(
+                                              color: Colors.white,
+                                              spreadRadius: -2.0,
+                                              blurRadius: 6.0,
+                                            ),
+                                          ],
                                         ),
                                         child: Icon(
                                           PhosphorIcons.plus(),
@@ -303,7 +311,7 @@ class _AddToCartState extends State<AddToCart> {
               quantity: quantity,
             ),
             const SizedBox(height: AppSpacing.md),
-            CustomElevated(
+            FilledButtonCustom(
               onPressed: widget.onPressed,
               text: widget.title,
             ),

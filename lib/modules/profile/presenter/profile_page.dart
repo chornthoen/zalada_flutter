@@ -6,9 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/change_password/page/change_password_page.dart';
 import 'package:zalada_flutter/modules/authentication/login/pages/login_page.dart';
+import 'package:zalada_flutter/modules/orders/presenter/payment_method_page.dart';
 import 'package:zalada_flutter/modules/profile/models/model_language.dart';
 import 'package:zalada_flutter/modules/profile/presenter/about_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/edite_profile_page.dart';
+import 'package:zalada_flutter/modules/profile/presenter/order_history_page.dart';
 import 'package:zalada_flutter/modules/profile/presenter/privacy_policy_page.dart';
 import 'package:zalada_flutter/modules/profile/widgets/item_language.dart';
 import 'package:zalada_flutter/modules/profile/widgets/item_profile.dart';
@@ -133,14 +135,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           title: 'Payment Method',
                           icon: PhosphorIconsRegular.creditCard,
                           onPressed: () {
-                            context.push(ChangePasswordPage.routePath);
+                            context.push(PaymentMethodPage.routePath);
                           },
                         ),
                         const CustomDivider(),
                         ItemProfile(
                           title: 'History',
                           icon: IconlyLight.timeSquare,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.push(OrderHistoryPage.routePath);
+                          },
                         ),
                         const CustomDivider(),
                         ItemProfile(
@@ -179,19 +183,25 @@ class _ProfilePageState extends State<ProfilePage> {
                         ItemProfile(
                           title: 'Change Language',
                           icon: PhosphorIconsLight.globe,
-                          onPressed: () {},
+                          onPressed: () {
+                            selectLanguage();
+                          },
                         ),
                         const CustomDivider(),
                         ItemProfile(
                           title: 'Change Password',
                           icon: PhosphorIconsRegular.password,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.push(ChangePasswordPage.routePath);
+                          },
                         ),
                         const CustomDivider(),
                         ItemProfile(
                           title: 'Help & Support',
                           icon: PhosphorIconsLight.question,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.push(PrivacyPolicyPage.routePath);
+                          },
                         ),
                         const CustomDivider(),
                         ItemProfile(

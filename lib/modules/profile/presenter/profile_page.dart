@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/change_password/page/change_password_page.dart';
 import 'package:zalada_flutter/modules/authentication/login/pages/login_page.dart';
+import 'package:zalada_flutter/modules/orders/presenter/address_page.dart';
 import 'package:zalada_flutter/modules/orders/presenter/payment_method_page.dart';
 import 'package:zalada_flutter/modules/profile/models/model_language.dart';
 import 'package:zalada_flutter/modules/profile/presenter/about_page.dart';
@@ -128,7 +129,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ItemProfile(
                           title: 'Address',
                           icon: IconlyLight.location,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.push(AddressPage.routePath);
+                          },
                         ),
                         const CustomDivider(),
                         ItemProfile(

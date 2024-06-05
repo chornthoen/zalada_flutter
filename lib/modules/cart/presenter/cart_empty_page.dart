@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zalada_flutter/modules/main/presenter/main_page.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 
 class CartEmptyPage extends StatelessWidget {
   const CartEmptyPage({super.key});
@@ -36,7 +36,7 @@ class CartEmptyPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
-          CustomElevated(
+          FilledButtonCustom(
             onPressed: () {
               pageController.jumpToPage(0);
             },

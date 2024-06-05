@@ -7,6 +7,7 @@ import 'package:zalada_flutter/modules/orders/widgets/item_address.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({super.key});
@@ -25,7 +26,6 @@ class _AddressPageState extends State<AddressPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
-          vertical: AppSpacing.md,
         ),
         child: LazyListView(
           children: [
@@ -59,7 +59,7 @@ class _AddressPageState extends State<AddressPage> {
           right: AppSpacing.xlg,
           bottom: AppSpacing.xxlg,
         ),
-        child: CustomElevated(
+        child: FilledButtonCustom(
           onPressed: () {},
           text: 'Add New Address',
         ),

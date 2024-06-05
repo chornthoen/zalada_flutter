@@ -23,8 +23,32 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage>
     with AutomaticKeepAliveClientMixin {
+  final key = GlobalKey<AnimatedListState>();
   @override
   bool get wantKeepAlive => true;
+
+  void removeItems(int index) {
+    final removeList = cartItems.removeAt(index);
+    key.currentState!.removeItem(
+      index,
+      (context, animation) => SizeTransition(
+        sizeFactor: animation,
+        child: CartItemCard(
+          imageUrl: removeList.imageUrl,
+          title: removeList.title,
+          price: removeList.price,
+          originalPrice: removeList.originalPrice,
+          quantity: removeList.quantity,
+          onDelete: () {},
+          selected: removeList.selected,
+          onDecrement: () {},
+          onIncrement: () {},
+          onSelected: (value) {},
+        ),
+      ),
+    );
+    setState(() {});
+  }
 
   void removeItem(int index) {
     setState(() {
@@ -104,9 +128,11 @@ class _CartPageState extends State<CartPage>
               ],
             ),
           ],
-          ...List.generate(
-            cartItems.length,
-            (index) {
+          AnimatedList(
+            key: key,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index, animation) {
               final item = cartItems[index];
               return CartItemCard(
                 imageUrl: item.imageUrl,
@@ -115,6 +141,7 @@ class _CartPageState extends State<CartPage>
                 originalPrice: item.originalPrice,
                 quantity: item.quantity,
                 onDelete: () {
+                  // removeItems(index);
                   _confirmDelete(index);
                 },
                 selected: item.selected,
@@ -139,6 +166,7 @@ class _CartPageState extends State<CartPage>
                 },
               );
             },
+            initialItemCount: cartItems.length,
           ),
           const SizedBox(height: AppSpacing.xs),
           Column(
@@ -214,7 +242,7 @@ class _CartPageState extends State<CartPage>
       title: 'Delete Product',
       content: 'Are you sure you want to delete this item?',
       ok: () {
-        removeItem(index);
+        removeItems(index);
         Navigator.of(context).pop();
       },
       okText: 'Delete',

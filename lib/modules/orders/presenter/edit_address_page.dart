@@ -3,74 +3,87 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:zalada_flutter/modules/authentication/widgets/label_text.dart';
 import 'package:zalada_flutter/shared/colors/app_color.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
-import 'package:zalada_flutter/shared/widgets/custom_elevated.dart';
-import 'package:zalada_flutter/shared/widgets/custom_text_form_field.dart';
+import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
+import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
 
-class EditAddressPage extends StatefulWidget {
+class EditAddressPage extends StatelessWidget {
   const EditAddressPage({super.key});
 
   static const routePath = '/edit_address';
 
-  //
-
   @override
-  State<EditAddressPage> createState() => _EditAddressPageState();
+  Widget build(BuildContext context) {
+    return EditAddressPages();
+  }
 }
 
-class _EditAddressPageState extends State<EditAddressPage> {
+class EditAddressPages extends StatefulWidget {
+  const EditAddressPages({super.key});
+
+  @override
+  State<EditAddressPages> createState() => _EditAddressPagesState();
+}
+
+class _EditAddressPagesState extends State<EditAddressPages> {
   late TextEditingController nameLocationController;
   late TextEditingController addressController;
   late TextEditingController phoneNumberController;
 
+  final Completer<GoogleMapController> _controller = Completer();
+
+  //default location current location
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(11.5564, 104.9282),
+    zoom: 14.4746,
+  );
+
+  final LatLng initialPosition = LatLng(11.5564, 104.9282);
+  double lat = 11.5564;
+  double long = 104.9282;
+
   @override
   void initState() {
-    nameLocationController = TextEditingController();
-    addressController = TextEditingController(
-      text: getAddress(lat, long).toString(),
-    );
-    phoneNumberController = TextEditingController();
-    getAddress(lat, long).then((value) {
-      setState(() {
-        address = value;
-      });
-    });
-    print('-------------------$address');
     super.initState();
+    nameLocationController = TextEditingController();
+    addressController = TextEditingController();
+    phoneNumberController = TextEditingController();
+
+    // Fetch address and update the address controller
+    _updateAddress(lat, long);
   }
 
   @override
   void dispose() {
-    super.dispose();
     nameLocationController.dispose();
     addressController.dispose();
     phoneNumberController.dispose();
+    super.dispose();
   }
 
-  final Completer<GoogleMapController> _controller = Completer();
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(11.5564, 104.9282),
-    zoom: 11.4746,
-  );
-  final LatLng position = LatLng(11.5564, 104.9282);
-  double lat = 11.5564;
-  double long = 104.9282;
+  Future<void> _updateAddress(double lat, double long) async {
+    String? address = await getAddress(lat, long);
+    setState(() {
+      addressController.text = address ?? '';
+    });
+  }
 
   Future<String?> getAddress(double lat, double long) async {
-    final placeMark = await placemarkFromCoordinates(lat, long);
-    final address = placeMark[0];
-    final street = '${address.thoroughfare}';
-    final subLocality = '${address.subLocality}';
-    final locality = '${address.locality}';
-    final country = '${address.country}';
-    return '$street, $subLocality, $locality, $country';
+    try {
+      final placeMarks = await placemarkFromCoordinates(lat, long);
+      final address = placeMarks[0];
+      final street = '${address.thoroughfare}';
+      final subLocality = '${address.subLocality}';
+      final locality = '${address.locality}';
+      final country = '${address.country}';
+      return '$street, $subLocality, $locality, $country';
+    } catch (e) {
+      print('Error fetching address: $e');
+      return null;
+    }
   }
-
-  String? address = '';
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +93,7 @@ class _EditAddressPageState extends State<EditAddressPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppSpacing.md),
             ),
@@ -93,7 +106,7 @@ class _EditAddressPageState extends State<EditAddressPage> {
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
                   onCameraIdle: () {
-                    getAddress(lat, long);
+                    _updateAddress(lat, long);
                   },
                   onCameraMove: (position) {
                     lat = position.target.latitude;
@@ -133,24 +146,21 @@ class _EditAddressPageState extends State<EditAddressPage> {
                           ),
                     ),
                     SizedBox(height: AppSpacing.lg),
-                    LabelText(label: 'Name Location'),
-                    SizedBox(height: AppSpacing.sm),
-                    CustomTextFieldForms(
-                      hintText: 'Name Location',
+                    TextFieldCustom(
+                      label: 'Name Location',
+                      controller: nameLocationController,
                     ),
                     SizedBox(height: AppSpacing.lg),
-                    LabelText(label: 'Address'),
-                    SizedBox(height: AppSpacing.sm),
-                    CustomTextFieldForms(
-                      hintText: 'Address',
+                    TextFieldCustom(
+                      label: 'Address details',
                       controller: addressController,
+                      maxLines: 3,
                     ),
                     SizedBox(height: AppSpacing.lg),
-                    LabelText(label: 'Phone Number'),
-                    SizedBox(height: AppSpacing.sm),
-                    CustomTextFieldForms(
-                      hintText: 'Phone Number',
+                    TextFieldCustom(
+                      label: 'Phone number',
                       keyboardType: TextInputType.phone,
+                      controller: phoneNumberController,
                     ),
                     SizedBox(height: AppSpacing.lg),
                   ],
@@ -166,7 +176,7 @@ class _EditAddressPageState extends State<EditAddressPage> {
           right: AppSpacing.lg,
           bottom: AppSpacing.xlg,
         ),
-        child: CustomElevated(
+        child: FilledButtonCustom(
           onPressed: () {},
           text: 'Save',
         ),

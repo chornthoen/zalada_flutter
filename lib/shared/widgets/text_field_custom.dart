@@ -16,6 +16,8 @@ class TextFieldCustom extends StatefulWidget {
     this.onSubmitted,
     this.enabled = true,
     this.suffixIcon,
+    this.maxLines = 1,
+    this.minLines = 1,
     super.key,
   });
 
@@ -31,6 +33,8 @@ class TextFieldCustom extends StatefulWidget {
   final Function(String)? onSubmitted;
   final bool? enabled;
   final Widget? suffixIcon;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   State<TextFieldCustom> createState() => _TextFieldCustomState();
@@ -86,6 +90,8 @@ class _TextFieldCustomState extends State<TextFieldCustom>
         child: CustomPaint(
           painter: CustomAnimateBorder(alpha.value),
           child: TextField(
+            maxLines: widget.maxLines,
+            minLines: widget.minLines,
             onSubmitted: widget.onSubmitted,
             focusNode: focusNode,
             enabled: widget.enabled,

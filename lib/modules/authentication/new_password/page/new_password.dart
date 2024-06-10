@@ -3,11 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/modules/authentication/login/pages/login_page.dart';
 import 'package:zalada_flutter/shared/spacing/app_spacing.dart';
-import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 import 'package:zalada_flutter/shared/widgets/custom_app_bar.dart';
 import 'package:zalada_flutter/shared/widgets/custom_bottom_sheet.dart';
 import 'package:zalada_flutter/shared/widgets/filled_button_custom.dart';
 import 'package:zalada_flutter/shared/widgets/text_field_custom.dart';
+
+import 'package:zalada_flutter/shared/widgets/close_keyboard.dart';
 
 class NewPasswordPage extends StatefulWidget {
   const NewPasswordPage({super.key});

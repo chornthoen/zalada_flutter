@@ -40,178 +40,180 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      backgroundColor: AppColors.kBackgroundColor,
-      body: NestedScrollView(
-        controller: scrollController,
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: AppColors.kBackgroundColor,
-              floating: true,
-              toolbarHeight: 70,
-              title: ProfileHomePage(
-                name: 'Chorn THOEN',
-                image:
-                    'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
-                cartCount: 2,
-                notificationCount: 3,
-                onCartPressed: () {
-                  pageController.jumpToPage(3);
-                },
-                onNotificationPressed: () {
-                  context.push(NotificationPage.routePath);
-                },
-                onProfilePressed: () {
-                  pageController.jumpToPage(4);
-                },
-              ),
-            ),
-          ];
-        },
-        body: SingleChildScrollView(
-          // controller: scrollController,
-          child: Column(
-            children: [
-              SectionTitle(
-                title: 'Hot deals 🔥',
-                action: 'See all',
-                onAction: () {
-                  context.push(HotDealSeeAllPage.routePath);
-                },
-              ),
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: 160,
-                  viewportFraction: 0.9,
-                  enableInfiniteScroll: true,
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 5),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.kBackgroundColor,
+        body: NestedScrollView(
+          controller: scrollController,
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: AppColors.kBackgroundColor,
+                floating: true,
+                toolbarHeight: 70,
+                title: ProfileHomePage(
+                  name: 'Chorn THOEN',
+                  image:
+                      'https://static.vecteezy.com/system/resources/thumbnails/008/846/297/small_2x/cute-boy-avatar-png.png',
+                  cartCount: 2,
+                  notificationCount: 3,
+                  onCartPressed: () {
+                    pageController.jumpToPage(3);
+                  },
+                  onNotificationPressed: () {
+                    context.push(NotificationPage.routePath);
+                  },
+                  onProfilePressed: () {
+                    pageController.jumpToPage(4);
+                  },
                 ),
-                items: Product.products.map((product) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: PromotionSlider(),
+              ),
+            ];
+          },
+          body: SingleChildScrollView(
+            // controller: scrollController,
+            child: Column(
+              children: [
+                SectionTitle(
+                  title: 'Hot deals 🔥',
+                  action: 'See all',
+                  onAction: () {
+                    context.push(HotDealSeeAllPage.routePath);
+                  },
+                ),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 160,
+                    viewportFraction: 0.9,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 5),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                  items: Product.products.map((product) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: PromotionSlider(),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: AppSpacing.lg),
+                SectionTitle(title: 'Categories'),
+                SizedBox(height: AppSpacing.md),
+                MenuCategories(),
+                SectionTitle(
+                  title: 'New Arrivals 🚀',
+                  action: 'See all',
+                  onAction: () {
+                    context.push(SeeAllCategoriesPage.routePath);
+                  },
+                ),
+                SizedBox(
+                  height: 220,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: productWishlistPhone.length <= 6
+                        ? productWishlistPhone.length
+                        : 6,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = productWishlistPhone[index];
+                      //see more
+                      if (index == 6 - 1 && productWishlistPhone.length > 6) {
+                        return SeeMore(
+                          onTap: () {
+                            context.push(SeeAllCategoriesPage.routePath);
+                          },
+                        );
+                      }
+                      return ProductCard(
+                        size: AppSpacing.lg,
+                        title: item.title,
+                        image: item.image,
+                        status: item.status,
+                        originalPrice: item.originalPrice,
+                        salePrice: item.salePrice,
+                        type: item.type,
                       );
                     },
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: AppSpacing.lg),
-              SectionTitle(title: 'Categories'),
-              SizedBox(height: AppSpacing.md),
-              MenuCategories(),
-              SectionTitle(
-                title: 'New Arrivals 🚀',
-                action: 'See all',
-                onAction: () {
-                  context.push(SeeAllCategoriesPage.routePath);
-                },
-              ),
-              SizedBox(
-                height: 220,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productWishlistPhone.length <= 6
-                      ? productWishlistPhone.length
-                      : 6,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
                   ),
-                  itemBuilder: (context, index) {
-                    final item = productWishlistPhone[index];
-                    //see more
-                    if (index == 6 - 1 && productWishlistPhone.length > 6) {
-                      return SeeMore(
-                        onTap: () {
-                          context.push(SeeAllCategoriesPage.routePath);
-                        },
+                ),
+                SectionTitle(
+                  title: 'Popular Products 🥇',
+                  action: 'See all',
+                  onAction: () {
+                    context.push(SeeAllCategoriesPage.routePath);
+                  },
+                ),
+                SizedBox(
+                  height: 220,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: productWishlistPhone.length,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = productWishlistPhone[index];
+                      return ProductCard(
+                        size: AppSpacing.lg,
+                        title: item.title,
+                        image: item.image,
+                        status: item.status,
+                        originalPrice: item.originalPrice,
+                        salePrice: item.salePrice,
+                        type: item.type,
                       );
-                    }
-                    return ProductCard(
-                      size: AppSpacing.lg,
-                      title: item.title,
-                      image: item.image,
-                      status: item.status,
-                      originalPrice: item.originalPrice,
-                      salePrice: item.salePrice,
-                      type: item.type,
-                    );
-                  },
-                ),
-              ),
-              SectionTitle(
-                title: 'Popular Products 🥇',
-                action: 'See all',
-                onAction: () {
-                  context.push(SeeAllCategoriesPage.routePath);
-                },
-              ),
-              SizedBox(
-                height: 220,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productWishlistPhone.length,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
+                    },
                   ),
-                  itemBuilder: (context, index) {
-                    final item = productWishlistPhone[index];
-                    return ProductCard(
-                      size: AppSpacing.lg,
-                      title: item.title,
-                      image: item.image,
-                      status: item.status,
-                      originalPrice: item.originalPrice,
-                      salePrice: item.salePrice,
-                      type: item.type,
-                    );
+                ),
+                SectionTitle(
+                  title: 'Best Deals',
+                  action: 'See all',
+                  onAction: () {
+                    context.push(SeeAllCategoriesPage.routePath);
                   },
                 ),
-              ),
-              SectionTitle(
-                title: 'Best Deals',
-                action: 'See all',
-                onAction: () {
-                  context.push(SeeAllCategoriesPage.routePath);
-                },
-              ),
-              SizedBox(
-                height: 220,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productWishlistPhone.length,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
+                SizedBox(
+                  height: 220,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: productWishlistPhone.length,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = productWishlistPhone[index];
+                      return ProductCard(
+                        size: AppSpacing.lg,
+                        title: item.title,
+                        image: item.image,
+                        status: item.status,
+                        originalPrice: item.originalPrice,
+                        salePrice: item.salePrice,
+                        type: item.type,
+                      );
+                    },
                   ),
-                  itemBuilder: (context, index) {
-                    final item = productWishlistPhone[index];
-                    return ProductCard(
-                      size: AppSpacing.lg,
-                      title: item.title,
-                      image: item.image,
-                      status: item.status,
-                      originalPrice: item.originalPrice,
-                      salePrice: item.salePrice,
-                      type: item.type,
-                    );
-                  },
                 ),
-              ),
-              const SizedBox(height: AppSpacing.xxxlg),
-            ],
+                const SizedBox(height: AppSpacing.xxxlg),
+              ],
+            ),
           ),
         ),
       ),

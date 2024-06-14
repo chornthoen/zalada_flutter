@@ -19,6 +19,7 @@ class CustomCheckoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
+      color: AppColors.kWhiteColor,
       padding: EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
       ),

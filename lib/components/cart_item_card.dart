@@ -41,19 +41,21 @@ class CartItemCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(
         bottom: AppSpacing.md,
+        left: AppSpacing.md,
+        right: AppSpacing.md,
       ),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: AppColors.kWhiteColor,
         boxShadow: [
           BoxShadow(
-            color: AppColors.kColorGray100,
+            color: AppColors.kColorGray200,
             spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 4),
+            blurRadius: 6,
+            offset: const Offset(0, 6),
           ),
         ],
-        borderRadius: BorderRadius.circular(AppSpacing.lg),
+        borderRadius: BorderRadius.circular(AppSpacing.md),
       ),
       child: Column(
         children: [

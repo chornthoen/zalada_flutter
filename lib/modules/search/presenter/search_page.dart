@@ -64,11 +64,16 @@ class _SearchPageState extends State<SearchPage>
               splashBorderRadius: BorderRadius.circular(AppSpacing.sm),
               isScrollable: true,
               controller: tabController,
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
               tabAlignment: TabAlignment.start,
               indicator: BoxDecoration(
-                color: AppColors.kPrimaryColor,
                 borderRadius: BorderRadius.circular(AppSpacing.sm),
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.kPrimaryColor,
+                    AppColors.kPrimaryColor.withOpacity(0.8),
+                  ],
+                ),
               ),
               indicatorSize: TabBarIndicatorSize.label,
               labelColor: AppColors.kWhiteColor,

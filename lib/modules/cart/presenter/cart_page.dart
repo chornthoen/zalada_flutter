@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:zalada_flutter/components/cart_item_card.dart';
 import 'package:zalada_flutter/components/lazy_list_view.dart';
 import 'package:zalada_flutter/modules/cart/models/cart_models.dart';
@@ -24,6 +23,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage>
     with AutomaticKeepAliveClientMixin {
   final key = GlobalKey<AnimatedListState>();
+
   @override
   bool get wantKeepAlive => true;
 
@@ -75,24 +75,16 @@ class _CartPageState extends State<CartPage>
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: AppColors.kBackgroundColor,
-        title: Text('Cart'),
+        automaticallyImplyLeading: false,
         centerTitle: true,
-        actions: [
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.kColorGray200,
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(AppSpacing.sm),
-            child: Icon(
-              PhosphorIcons.dotsThreeVertical(),
-              color: AppColors.kColorGray500,
-            ),
-          ),
-          const SizedBox(width: AppSpacing.lg),
-        ],
+        title: Text(
+          'Cart',
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.kPrimaryColor,
+              ),
+        ),
       ),
       body: LazyListView(
         children: [
@@ -206,6 +198,7 @@ class _CartPageState extends State<CartPage>
                   },
                 ),
               ),
+              SizedBox(height: AppSpacing.xlg),
             ],
           ),
         ],

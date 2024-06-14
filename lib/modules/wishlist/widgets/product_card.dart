@@ -40,14 +40,12 @@ class ProductCard extends StatelessWidget {
           children: [
             Container(
               width: 174,
-              margin: const EdgeInsets.only(
-                bottom: 10,
-              ),
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 color: AppColors.kWhiteColor,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.kColorGray100,
+                    color: AppColors.kColorGray300,
                     spreadRadius: 1,
                     blurRadius: 4,
                     offset: const Offset(0, 4),
